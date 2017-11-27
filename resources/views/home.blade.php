@@ -8,7 +8,8 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <a href="{{url('/list')}}">Equipment</a>
+                    <a href="{{url('/list')}}">List of Equipment</a> <br>
+                    <a href="{{url('/new')}}">Add new equipment</a>
                 </div>
             </div>
         </div>

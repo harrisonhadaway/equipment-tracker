@@ -1,0 +1,11 @@
+List- pretty it up 
+
+Profile- has placeholer img in place. 
+- need profile built
+- image upload needed through the form 
+
+Dashboard- need just basic finctionallity for now. Plan to add highlighted equipment to it. Need to get the toggle working on the profile portion 
+
+New Equipment Form- Submits to db but is not pretty
+
+Need equipment maintanance record table

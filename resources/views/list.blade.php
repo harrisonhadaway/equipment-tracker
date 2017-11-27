@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">All Equipment:</div>
+                <div class="panel-heading"><a href="{{url('/home')}}">Home</a></div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -20,10 +20,11 @@
                         @foreach ($equipment as $equipment)
                         <li class="list-group-item">
 
-                        <div class="media">
+                        <div class="media" onclick="document.location= 'profile/{{ $equipment->id }}'">
                           <div class="media-left">
                             <a href="#">
-                              <img class="media-object" style="width:60px" src="..." alt="...">
+                              <img class="media-object" style="width:60px" 
+                              src="#" onerror="this.src='../img/placeholder.jpg'" >
                             </a>
                           </div>
                           <div class="media-body">

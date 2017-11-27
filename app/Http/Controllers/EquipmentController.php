@@ -13,7 +13,8 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $equipment = \App\Equipment::all();
+        $user = \Auth::User()->id;
+        $equipment = \App\Equipment::where('owner_id', '=', $user)->get();
         return view('list', compact('equipment'));
     }
 
@@ -50,7 +51,7 @@ class EquipmentController extends Controller
         $equipment->serial_number = $request->input('serial_number');
         $equipment->vin_number = $request->input('vin_number');
         $equipment->save();
-        return $equipment;
+        return view('/home');
     }
 
     /**
@@ -62,7 +63,8 @@ class EquipmentController extends Controller
     public function show($id)
     {
         $equipment = \App\Equipment::find($id);
-        return view('profile', compact('equipment'));
+        $maintenance_logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->get();
+        return view('profile', compact('equipment', 'maintenance_logs'));
     }
 
     /**
