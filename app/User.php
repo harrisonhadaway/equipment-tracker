@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getOwner()
+    {
+        return $this->hasMany('App\Equipment', 'owner_id');
+    }
 }
