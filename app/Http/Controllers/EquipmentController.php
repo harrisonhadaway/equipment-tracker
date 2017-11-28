@@ -54,6 +54,21 @@ class EquipmentController extends Controller
         return view('/home');
     }
 
+    public function newrecord(Request $request)
+    {
+        $maintenance_logs = new \App\Maintenance_logs;
+
+        $maintenance_logs->equipment_id = $request->input('equipment_id');
+        $maintenance_logs->service_description = $request->input('service_description');
+        $maintenance_logs->serviced_by = $request->input('serviced_by');
+        $maintenance_logs->hours_at_service = $request->input('hours_at_service');
+        $maintenance_logs->service_cost = $request->input('service_cost');
+        $maintenance_logs->service_notes = $request->input('service_notes');
+        $maintenance_logs->save();
+
+        return view('/home');
+    }
+
     /**
      * Display the specified resource.
      *

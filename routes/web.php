@@ -23,7 +23,11 @@ Route::get('/new', function() {
 	return view('new');
 });
 
+
+
 Route::get('/profile/{id}', 'EquipmentController@show');
+
+Route::post('/profile/{id}', 'EquipmentController@newrecord');
 
 Route::get('/list', 'EquipmentController@index');
 

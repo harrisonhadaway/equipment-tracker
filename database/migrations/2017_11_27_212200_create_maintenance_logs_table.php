@@ -20,6 +20,7 @@ class CreateMaintenanceLogsTable extends Migration
             $table->string('serviced_by');
             $table->string('hours_at_service');
             $table->string('service_cost');
+            $table->string('service_notes');
             $table->timestamps();
         });
     }
