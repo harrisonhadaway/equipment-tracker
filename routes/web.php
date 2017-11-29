@@ -27,9 +27,11 @@ Route::get('/new', function() {
 
 Route::get('/profile/{id}', 'EquipmentController@show');
 
+Route::put('/profile/{id}', 'EquipmentController@update');
+
 Route::post('/profile/{id}', 'EquipmentController@newrecord');
 
-Route::put('/profile/{id}', 'EquipmentController@update');
+
 
 Route::get('/list', 'EquipmentController@index');
 
