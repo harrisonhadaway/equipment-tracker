@@ -59,17 +59,44 @@
                     </thead>
                     <tbody>
                       @foreach($maintenance_logs as $maintenance_log)
-                      <tr>
-                        <td><strong>{{ $maintenance_log->service_description }}</strong></td>
-                        <td>{{ $maintenance_log->serviced_by }}</td>
-                        <td>{{ $maintenance_log->hours_at_service }}</td>
-                        <td>{{ $maintenance_log->created_at }}</td>
-                        <td>${{ $maintenance_log->service_cost }}</td>
-                      </tr>  
+                      <tr class="media" onclick="$('#{{ $maintenance_log->id }}').modal('show')">
+                        
+                            
+                            <td><strong>{{ $maintenance_log->service_description }}</strong></td>
+                            <td>{{ $maintenance_log->serviced_by }}</td>
+                            <td>{{ $maintenance_log->hours_at_service }}</td>
+                            <td>{{ $maintenance_log->created_at }}</td>
+                            <td>${{ $maintenance_log->service_cost }}</td>
+
+                        
+                        </tr>
+                        <div class="modal fade" id="{{ $maintenance_log->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h3 class="modal-title" id="myModalLabel">{{ $maintenance_log->service_description }}</h3>
+                              </div>
+                              <div class="modal-body">
+                                
+                                <h4>Service by: {{ $maintenance_log->serviced_by }}</h4>
+                                <h4>Hours at serice: {{ $maintenance_log->hours_at_service }}</h4>
+                                <h4>Work completed on: {{ $maintenance_log->created_at }}</h4>
+                                <h4>Cost of work: ${{ $maintenance_log->service_cost }}</h4>
+                                <p>Notes: {{ $maintenance_log->service_notes }} </p>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+
+                            </div>
+                        </div>
+                        </div>
+                        </div>
                       @endforeach         
                     </tbody>
                 </table>
-
                 
             </div>
         </div>
@@ -77,4 +104,5 @@
 </div>
 @extends('layouts.newrecord')
 @extends('layouts.editform')
+
 @endsection

@@ -84,6 +84,14 @@ class EquipmentController extends Controller
         return view('profile', compact('equipment', 'maintenance_logs', 'total_cost'));
     }
 
+    public function showrecord($id, $recordId)
+    {
+        $equipment = \App\Equipment::find($id);
+        $maintenance_logs = \App\Maintenance_logs::find($recordId);
+
+        return $maintenance_logs;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
