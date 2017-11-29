@@ -66,7 +66,7 @@ class EquipmentController extends Controller
         $maintenance_logs->service_notes = $request->input('service_notes');
         $maintenance_logs->save();
 
-        return view('/home');
+        return redirect('/profile/' . $request->input('equipment_id'));
     }
 
     /**
@@ -79,7 +79,9 @@ class EquipmentController extends Controller
     {
         $equipment = \App\Equipment::find($id);
         $maintenance_logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->get();
-        return view('profile', compact('equipment', 'maintenance_logs'));
+        $maintenance_logs = $maintenance_logs->sortbydesc('created_at');
+        $total_cost = $maintenance_logs->sum('service_cost');
+        return view('profile', compact('equipment', 'maintenance_logs', 'total_cost'));
     }
 
     /**
@@ -102,7 +104,7 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $request;
     }
 
     /**

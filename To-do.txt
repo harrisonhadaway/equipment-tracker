@@ -1,11 +1,27 @@
-List- pretty it up 
 
-Profile- has placeholer img in place. 
+XXProfile- has placeholer img in place. 
 - need profile built
 - image upload needed through the form 
 
-Dashboard- need just basic finctionallity for now. Plan to add highlighted equipment to it. Need to get the toggle working on the profile portion 
+Dashboard- need just basic functionallity for now. Plan to add highlighted equipment to it. Need to get the toggle working on the profile portion 
+
+
+**** Need equipment maintanance record table\
+
+
+List- pretty it up 
+Searchable list! 
 
 New Equipment Form- Submits to db but is not pretty
 
-Need equipment maintanance record table
+
+
+EMAIL service 
+
+
+Broke a profile page with a comma in the cost of a maintenance record
+
+
+Format date on maintenance table
+
+
