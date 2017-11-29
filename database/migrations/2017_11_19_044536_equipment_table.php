@@ -20,13 +20,13 @@ class EquipmentTable extends Migration
             $table->string('model');
             $table->char('year', 4);
             $table->boolean('highlighted');
-            $table->string('purchase_miles');
-            $table->string('purchase_hours');
-            $table->string('purchase_from');
-            $table->string('purchase_date');
-            $table->string('purchase_price');
-            $table->string('serial_number');
-            $table->string('vin_number');
+            $table->enum('hours_or_miles', ['hours', 'miles']);
+            $table->string('purchase_usage');
+            $table->string('purchase_from')->nullable();
+            $table->string('purchase_date')->nullable();
+            $table->char('purchase_price', 10)->nullable();
+            $table->char('serial_number', 30)->nullable();
+            $table->char('vin_number', 30)->nullable();
             $table->timestamps();
 
         });    

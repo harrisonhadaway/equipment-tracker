@@ -17,10 +17,10 @@ class CreateMaintenanceLogsTable extends Migration
             $table->increments('id');
             $table->integer('equipment_id')->unsigned();
             $table->string('service_description');
-            $table->string('serviced_by');
-            $table->string('hours_at_service');
-            $table->string('service_cost');
-            $table->string('service_notes');
+            $table->string('serviced_by')->nullable();
+            $table->string('usage_at_service')->nullable();
+            $table->string('service_cost')->nullable();
+            $table->string('service_notes')->nullable();
             $table->timestamps();
         });
     }
