@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -37,14 +43,13 @@ class EquipmentController extends Controller
     public function store(Request $request)
     {
         $equipment = new \App\Equipment;
-
         $equipment->owner_id = \Auth::user()->id;
         $equipment->make = $request->input('make');
         $equipment->model = $request->input('model');
         $equipment->year = $request->input('year');
         $equipment->highlighted = false;
-        $equipment->purchase_miles = $request->input('purchase_miles');
-        $equipment->purchase_hours = $request->input('purchase_hours');
+        $equipment->hours_or_miles = $request->input('hours_or_miles');
+        $equipment->purchase_usage = $request->input('purchase_usage');
         $equipment->purchase_from = $request->input('purchase_from');
         $equipment->purchase_date = $request->input('purchase_date');
         $equipment->purchase_price = $request->input('purchase_price');
@@ -57,15 +62,13 @@ class EquipmentController extends Controller
     public function newrecord(Request $request)
     {
         $maintenance_logs = new \App\Maintenance_logs;
-
         $maintenance_logs->equipment_id = $request->input('equipment_id');
         $maintenance_logs->service_description = $request->input('service_description');
         $maintenance_logs->serviced_by = $request->input('serviced_by');
-        $maintenance_logs->hours_at_service = $request->input('hours_at_service');
+        $maintenance_logs->usage_at_service = $request->input('usage_at_service');
         $maintenance_logs->service_cost = $request->input('service_cost');
         $maintenance_logs->service_notes = $request->input('service_notes');
         $maintenance_logs->save();
-
         return redirect('/profile/' . $request->input('equipment_id'));
     }
 
@@ -88,8 +91,27 @@ class EquipmentController extends Controller
     {
         $equipment = \App\Equipment::find($id);
         $maintenance_logs = \App\Maintenance_logs::find($recordId);
-
         return $maintenance_logs;
+    }
+
+    public function favorite_equipment($id)
+    {
+        $equipment = \App\Equipment::find($id);
+        $equipment = !$equipment->highlighted;
+        
+        // Needs work!
+
+        return redirect('/profile/' . $request->input('equipment_id'));
+
+
+
+    }
+
+    public function favorites()
+    {
+        $user = \Auth::User()->id;
+        $favorites = \App\Equipment::where('highlighted', '=', true)->where('owner_id', '=', $user)->get();
+        return view('home', compact('favorites'));
     }
 
     /**
@@ -112,13 +134,12 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $equipment = \App\Equipment::find($id);
         $equipment->make = $request->input('make');
         $equipment->model = $request->input('model');
         $equipment->year = $request->input('year');
-        $equipment->purchase_miles = $request->input('purchase_miles');
-        $equipment->purchase_hours = $request->input('purchase_hours');
+        $equipment->hours_or_miles = $request->input('hours_or_miles');
+        $equipment->purchase_usage = $request->input('purchase_usage');
         $equipment->purchase_from = $request->input('purchase_from');
         $equipment->purchase_date = $request->input('purchase_date');
         $equipment->purchase_price = $request->input('purchase_price');

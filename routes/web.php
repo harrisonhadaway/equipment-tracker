@@ -17,13 +17,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('/new', function() {
 	return view('new');
 });
 
-
+Route::get('/home', 'EquipmentController@favorites');
 
 Route::get('/profile/{id}', 'EquipmentController@show');
 
@@ -33,7 +31,7 @@ Route::put('/profile/{id}', 'EquipmentController@update');
 
 Route::post('/profile/{id}', 'EquipmentController@newrecord');
 
-
+Route::post('/profile/{id}/favorite', 'EquipmentController@favorite_equipment');
 
 Route::get('/list', 'EquipmentController@index');
 

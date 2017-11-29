@@ -9,6 +9,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{url('/list')}}"><button type="button" class="btn btn-default">List of Equipment</button></a>
+
+                    <!-- <form class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
+                      {{ csrf_field() }}
+                      <button class="btn btn-xs btn-default"><strong>&#9734;</strong></button>
+                    </form> -->
                 </div>
                 <div class="panel-body">
                     <div class="col-md-4" style="padding: 25px;">
@@ -22,7 +27,7 @@
                     <div class="col-md-4 ">
                         <strong>Purchase date:</strong> {{ $equipment->purchase_date }} <br>
                         <strong>Purchase from:</strong> {{ $equipment->purchase_from }} <br>
-                        <strong>Hours at purchase:</strong> {{ $equipment->purchase_hours }}
+                        <strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ $equipment->purchase_usage }}
                     </div>
                     <div class="col-md-4">
                         <strong>Maintenance Cost:</strong> ${{ $total_cost }} <br>
@@ -51,7 +56,7 @@
                       <tr>
                         <th>Service Description</th>
                         <th>Serviced by</th>
-                        <th>Hours</th>
+                        <th>{{ $equipment->hours_or_miles }}</th>
                         <th>Date</th>
                         <th>Cost</th>
                       </tr>
@@ -61,7 +66,7 @@
                       <tr class="media" onclick="$('#{{ $maintenance_log->id }}').modal('show')">
                             <td><strong>{{ $maintenance_log->service_description }}</strong></td>
                             <td>{{ $maintenance_log->serviced_by }}</td>
-                            <td>{{ $maintenance_log->hours_at_service }}</td>
+                            <td>{{ $maintenance_log->usage_at_service }}</td>
                             <td>{{ $maintenance_log->created_at }}</td>
                             <td>${{ $maintenance_log->service_cost }}</td>
                         </tr>
@@ -76,7 +81,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <h4>Service by: {{ $maintenance_log->serviced_by }}</h4>
-                                        <h4>Hours at serice: {{ $maintenance_log->hours_at_service }}</h4>
+                                        <h4>{{ $equipment->hours_or_miles }} at serice: {{ $maintenance_log->usage_at_service }}</h4>
                                         <h4>Work completed on: {{ $maintenance_log->created_at }}</h4>
                                         <h4>Cost of work: ${{ $maintenance_log->service_cost }}</h4>
                                         <p>Notes: {{ $maintenance_log->service_notes }} </p>

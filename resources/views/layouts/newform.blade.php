@@ -41,12 +41,13 @@
                         </div>
                         <div class="form-group row">
                           <div class="col-xs-3">
-                            <label for="purchase_miles">Miles at purchase:</label>
-                            <input class="form-control" id="purchase_miles" name="purchase_miles" type="text">
+                            <label for="hours_or_miles"></label>  <br>                          
+                              <label><input type="radio" id="hours_or_miles" name="hours_or_miles" value="Hours"> Hours  </label> 
+                              <label><input type="radio" id="hours_or_miles" name="hours_or_miles" value="Miles"> Miles </label>
                           </div>
                           <div class="col-xs-3">
-                            <label for="purchase_hours">Hours at purchase:</label>
-                            <input class="form-control" id="purchase_hours" name="purchase_hours" type="text">
+                            <label for="purchase_usage">Amount</label>
+                            <input class="form-control" id="purchase_usage" name="purchase_usage" type="text">
                           </div>
                         </div>      
                         <div class="form-group row">

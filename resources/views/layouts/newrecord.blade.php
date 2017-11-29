@@ -16,8 +16,8 @@
                 <div class="col-xs-4">Serviced by
                   <input id="serviced_by" name="serviced_by" type="text" class="form-control" placeholder="Billy Bob">
                 </div>
-                <div class="col-xs-2">Hours
-                  <input id="hours_at_service" name="hours_at_service" type="text" class="form-control" placeholder="1,234">
+                <div class="col-xs-2">{{ $equipment->hours_or_miles }}
+                  <input id="usage_at_service" name="usage_at_service" type="text" class="form-control" placeholder="1,234">
                 </div>
                 <div class="col-xs-2">Cost
                   <input id="service_cost" name="service_cost" type="text" class="form-control" placeholder="1,234">

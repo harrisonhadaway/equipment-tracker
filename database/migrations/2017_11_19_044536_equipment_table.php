@@ -20,7 +20,7 @@ class EquipmentTable extends Migration
             $table->string('model');
             $table->char('year', 4);
             $table->boolean('highlighted');
-            $table->enum('hours_or_miles', ['hours', 'miles']);
+            $table->enum('hours_or_miles', ['Hours', 'Miles']);
             $table->string('purchase_usage');
             $table->string('purchase_from')->nullable();
             $table->string('purchase_date')->nullable();
