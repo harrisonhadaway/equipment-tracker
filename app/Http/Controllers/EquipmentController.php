@@ -104,7 +104,21 @@ class EquipmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $request;
+
+        $equipment = \App\Equipment::find($id);
+        $equipment->make = $request->input('make');
+        $equipment->model = $request->input('model');
+        $equipment->year = $request->input('year');
+        $equipment->purchase_miles = $request->input('purchase_miles');
+        $equipment->purchase_hours = $request->input('purchase_hours');
+        $equipment->purchase_from = $request->input('purchase_from');
+        $equipment->purchase_date = $request->input('purchase_date');
+        $equipment->purchase_price = $request->input('purchase_price');
+        $equipment->serial_number = $request->input('serial_number');
+        $equipment->vin_number = $request->input('vin_number');
+        $equipment->save();
+        return redirect('/profile/' . $request->input('equipment_id'));
+        
     }
 
     /**

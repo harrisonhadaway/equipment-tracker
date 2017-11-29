@@ -4,12 +4,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">New Equipment</h4>
+        <h4 class="modal-title" id="myModalLabel">Update Equipment Info</h4>
       </div>
       <div class="modal-body">
         
-        <form method="post" action="/equipment">
+        <form method="post" action="{{action('EquipmentController@update',['id'=>$equipment->id])}}">
+                        <input type="hidden" name="_method" value="put" />
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" name="equipment_id" id="equipment_id" value="{{ $equipment->id }}">
                         <div class="form-group row">
                           <div class="col-xs-3">
                             <label for="make">Make</label>
