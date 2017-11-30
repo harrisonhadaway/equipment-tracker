@@ -8,13 +8,30 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{url('/list')}}"><button type="button" class="btn btn-default">List of Equipment</button></a>
 
-                    <!-- <form class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
-                      {{ csrf_field() }}
-                      <button class="btn btn-xs btn-default"><strong>&#9734;</strong></button>
-                    </form> -->
+                    <div>
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                      <div class="btn-group" role="group">
+                        <a href="{{url('/list')}}"><button type="button" class="btn btn-default">Equipment List</button></a>
+                      </div>
+                      
+                      <div class="btn-group" role="group" >
+                        <form class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
+                        {{ csrf_field() }}
+<!--                         <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
+ -->                        <button type="button" class="btn btn-default {{ $favorite_class }}"><strong>&#9734;</strong></button>
+                        </form>
+
+                      </div>
+                    
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-default">Export Info</button>
+                      </div>
+                    </div>
                 </div>
+
+            
+
                 <div class="panel-body">
                     <div class="col-md-4" style="padding: 25px;">
                         <img src="#" onerror="this.src='../img/placeholder.jpg'" 
@@ -95,6 +112,7 @@
                       @endforeach         
                     </tbody>
                 </table>
+
             </div>
         </div>
     </div>

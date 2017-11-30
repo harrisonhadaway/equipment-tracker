@@ -21,6 +21,7 @@ class EquipmentController extends Controller
     {
         $user = \Auth::User()->id;
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get();
+
         return view('list', compact('equipment'));
     }
 
@@ -80,11 +81,22 @@ class EquipmentController extends Controller
      */
     public function show($id)
     {
+        
         $equipment = \App\Equipment::find($id);
         $maintenance_logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->get();
         $maintenance_logs = $maintenance_logs->sortbydesc('created_at');
         $total_cost = $maintenance_logs->sum('service_cost');
-        return view('profile', compact('equipment', 'maintenance_logs', 'total_cost'));
+        if($equipment->highlighted) {
+            $favorite_class = 'favorited';
+        }       
+        if(!$equipment->highlighted) {
+            $favorite_class = '';
+        }
+
+        if ($equipment->owner_id == \Auth::user()->id) {
+            return view('profile', compact('equipment', 'maintenance_logs', 'total_cost', 'favorite_class'));
+        }
+        return view('welcome');
     }
 
     public function showrecord($id, $recordId)
@@ -97,16 +109,17 @@ class EquipmentController extends Controller
     public function favorite_equipment($id)
     {
         $equipment = \App\Equipment::find($id);
-        $equipment = !$equipment->highlighted;
-        
-        // Needs work!
-
-        return redirect('/profile/' . $request->input('equipment_id'));
-
-
+        $equipment->highlighted = !$equipment->highlighted;
+        $equipment->save(); 
+        if($equipment->highlighted) {
+            $favorite_class = 'favorited';
+        }       
+        if(!$equipment->highlighted) {
+            $favorite_class = '';
+        }
+        return redirect('/profile/' . $id);
 
     }
-
     public function favorites()
     {
         $user = \Auth::User()->id;

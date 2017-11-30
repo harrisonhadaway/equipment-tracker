@@ -1,0 +1,7 @@
+.favorited {
+  background-color: #FBFFB9;
+}
+
+td:hover {
+	cursor: pointer;
+}
