@@ -7,28 +7,23 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">
-
-                    <div>
-                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                      <div class="btn-group" role="group">
-                        <a href="{{url('/list')}}"><button type="button" class="btn btn-default">Equipment List</button></a>
-                      </div>
-                      
-                      <div class="btn-group" role="group" >
+                <div class="panel-heading col-sm-12">
+                    <div class="col-md-3">
+                        <a href="{{url('/list')}}" class="btn btn-primary btn-md active" role="button">Equipment List</a>
+                    </div>
+                    <div class="col-md-2">
                         <form class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
-                        {{ csrf_field() }}
-<!--                         <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
- -->                        <button type="button" class="btn btn-default {{ $favorite_class }}"><strong>&#9734;</strong></button>
+                            {{ csrf_field() }}
+                            <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
+                            <button class="btn btn-default btn-md {{ $favorite_class }}"><strong>&#9734;</strong></button>
                         </form>
-
-                      </div>
-                    
-                      <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default">Export Info</button>
-                      </div>
                     </div>
                 </div>
+                
+                    
+                      
+                      
+                
 
             
 

@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{url('/home')}}"><button type="button" class="btn btn-default">Home</button></a>
+                    <a href="{{url('/home')}}"><button type="button" class="btn btn-primary btn-md active">Home</button></a>
 
 
                 <div class="panel-body">
