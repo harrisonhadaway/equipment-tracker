@@ -21,13 +21,19 @@ Route::get('/new', function() {
 	return view('new');
 });
 
+
+Route::put('/profile/{id}/update', 'EquipmentController@update_log');
+
+
 Route::get('/home', 'EquipmentController@favorites');
 
 Route::get('/profile/{id}', 'EquipmentController@show');
 
-Route::get('/profile/{id}/{recordId}', 'EquipmentController@showrecord');
+
 
 Route::put('/profile/{id}', 'EquipmentController@update');
+
+
 
 Route::post('/profile/{id}', 'EquipmentController@newrecord');
 

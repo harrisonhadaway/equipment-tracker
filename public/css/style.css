@@ -5,3 +5,7 @@
 td:hover {
 	cursor: pointer;
 }
+
+li:hover {
+	cursor: pointer;
+}

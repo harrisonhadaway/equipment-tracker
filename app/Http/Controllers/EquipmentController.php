@@ -19,10 +19,24 @@ class EquipmentController extends Controller
      */
     public function index()
     {
+        
         $user = \Auth::User()->id;
-        $equipment = \App\Equipment::where('owner_id', '=', $user)->get();
-       
-        return view('list', compact('equipment'));
+        $equipment = \App\Equipment::where('owner_id', '=', $user)->get()->sortbydesc('created_at');
+
+        $i = 1;
+        $j = 1;
+
+        foreach ($equipment as $machine) {
+
+            $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
+            
+            if($machine->latestLog == null) {
+                $machine->last_update = $machine->updated_at;
+            } else $machine->last_update = $log->created_at;
+            
+        }
+        
+         return view('list', compact('equipment'));
     }
 
     /**
@@ -62,6 +76,7 @@ class EquipmentController extends Controller
 
     public function newrecord(Request $request)
     {
+        
         $maintenance_logs = new \App\Maintenance_logs;
         $maintenance_logs->equipment_id = $request->input('equipment_id');
         $maintenance_logs->service_description = $request->input('service_description');
@@ -86,15 +101,26 @@ class EquipmentController extends Controller
         $maintenance_logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->get();
         $maintenance_logs = $maintenance_logs->sortbydesc('created_at');
         $total_cost = $maintenance_logs->sum('service_cost');
-        if($equipment->highlighted) {
+        
+        if($maintenance_logs->sortbydesc('created_at')->first() == !null) {
+            $last_update = $maintenance_logs->sortbydesc('created_at')->first();
+        } else $last_update = $equipment;
+
+            if($equipment->highlighted) {
             $favorite_class = 'favorited';
-        }       
-        if(!$equipment->highlighted) {
+            }       
+            if(!$equipment->highlighted) {
             $favorite_class = '';
-        }
+            }
+            if($equipment->hours_or_miles == 'Hours') {
+                $hours_select = "checked=''";
+            } else $hours_select = "";
+            if($equipment->hours_or_miles == 'Miles') {
+                $miles_select = "checked=''";
+            } else $miles_select = "";
 
         if ($equipment->owner_id == \Auth::user()->id) {
-            return view('profile', compact('equipment', 'maintenance_logs', 'total_cost', 'favorite_class'));
+            return view('profile', compact('equipment', 'maintenance_logs', 'total_cost', 'favorite_class', 'hours_select','miles_select', 'last_update'));
         }
         return view('welcome');
     }
@@ -160,9 +186,23 @@ class EquipmentController extends Controller
         $equipment->vin_number = $request->input('vin_number');
         $equipment->save();
         return redirect('/profile/' . $request->input('equipment_id'));
-        
     }
 
+    public function update_log(Request $request)
+    {
+        $id = $request->input('maintenance_log_id');
+        $maintenance_logs = \App\Maintenance_logs::find($id);
+        $maintenance_logs->service_description = $request->input('service_description');
+        $maintenance_logs->serviced_by = $request->input('serviced_by');
+        $maintenance_logs->usage_at_service = $request->input('usage_at_service');
+        $maintenance_logs->service_cost = $request->input('service_cost');
+        $maintenance_logs->service_notes = $request->input('service_notes');
+        $maintenance_logs->save();
+        
+        
+        return redirect('/profile/' . $maintenance_logs->equipment_id); 
+
+    }
     /**
      * Remove the specified resource from storage.
      *

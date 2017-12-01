@@ -10,17 +10,20 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="equipment_id" value="{{ $equipment->id }}">
               <div class="row">
-                <div class="col-xs-4">Brief Description
+                <div class="col-xs-5">Brief Description
                   <input id="service_description" name="service_description" type="text" class="form-control" placeholder="Oil Change">
                 </div>
-                <div class="col-xs-4">Serviced by
+                <div class="col-xs-3">{{ $equipment->hours_or_miles }}
+                  <input id="usage_at_service" name="usage_at_service" type="number" step="0.01" min="0" class="form-control" placeholder="1,234">
+                </div>
+                
+              </div>
+              <div class="row">
+                <div class="col-xs-5">Serviced by
                   <input id="serviced_by" name="serviced_by" type="text" class="form-control" placeholder="Billy Bob">
                 </div>
-                <div class="col-xs-2">{{ $equipment->hours_or_miles }}
-                  <input id="usage_at_service" name="usage_at_service" type="text" class="form-control" placeholder="1,234">
-                </div>
-                <div class="col-xs-2">Cost
-                  <input id="service_cost" name="service_cost" type="text" class="form-control" placeholder="1,234">
+                <div class="col-xs-3">Cost
+                  <input id="service_cost" name="service_cost" type="number" step="0.01" min="0" class="form-control" placeholder="1,234">
                 </div>
               </div>Notes
               <textarea id="service_notes" name="service_notes" class="form-control" rows="2" placeholder="He did good."></textarea>

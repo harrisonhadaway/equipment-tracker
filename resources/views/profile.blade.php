@@ -20,13 +20,6 @@
                     </div>
                 </div>
                 
-                    
-                      
-                      
-                
-
-            
-
                 <div class="panel-body">
                     <div class="col-md-4" style="padding: 25px;">
                         <img src="#" onerror="this.src='../img/placeholder.jpg'" 
@@ -34,15 +27,17 @@
                     </div>
                     <div class="col-md-8">
                         <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
-                        <h4>Last updated on 5-6-90 --TODO</h4>
+                       
+                        <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
+                      
                     </div>
                     <div class="col-md-4 ">
                         <strong>Purchase date:</strong> {{ $equipment->purchase_date }} <br>
                         <strong>Purchase from:</strong> {{ $equipment->purchase_from }} <br>
-                        <strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ $equipment->purchase_usage }}
+                        <strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ number_format($equipment->purchase_usage) }}
                     </div>
                     <div class="col-md-4">
-                        <strong>Maintenance Cost:</strong> ${{ $total_cost }} <br>
+                        <strong>Maintenance Cost:</strong> ${{ number_format($total_cost) }} <br>
                         <strong>S/N:</strong> {{ $equipment->serial_number }} <br>
                         <strong>VIN:</strong> {{ $equipment->vin_number }}
                     </div>
@@ -78,36 +73,59 @@
                       <tr class="media" onclick="$('#{{ $maintenance_log->id }}').modal('show')">
                             <td><strong>{{ $maintenance_log->service_description }}</strong></td>
                             <td>{{ $maintenance_log->serviced_by }}</td>
-                            <td>{{ $maintenance_log->usage_at_service }}</td>
-                            <td>{{ $maintenance_log->created_at }}</td>
-                            <td>${{ $maintenance_log->service_cost }}</td>
+                            <td>{{ number_format($maintenance_log->usage_at_service) }}</td>
+                            <td>{{ date_format($maintenance_log->created_at,"m/d/Y") }}</td>
+                            <td>${{ number_format($maintenance_log->service_cost) }}</td>
                         </tr>
-                        <div class="modal fade" id="{{ $maintenance_log->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h3 class="modal-title" id="myModalLabel">{{ $maintenance_log->service_description }}</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h4>Service by: {{ $maintenance_log->serviced_by }}</h4>
-                                        <h4>{{ $equipment->hours_or_miles }} at serice: {{ $maintenance_log->usage_at_service }}</h4>
-                                        <h4>Work completed on: {{ $maintenance_log->created_at }}</h4>
-                                        <h4>Cost of work: ${{ $maintenance_log->service_cost }}</h4>
-                                        <p>Notes: {{ $maintenance_log->service_notes }} </p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        
                       @endforeach         
                     </tbody>
                 </table>
 
+                @foreach($maintenance_logs as $maintenance_log)
+
+                <div class="modal fade" id="{{ $maintenance_log->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">{{ $maintenance_log->service_description }}</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form method="POST" action="/profile/{{ $equipment->id }}/update" id="form{{ $maintenance_log->id }}">
+                                    <input type="hidden" name="_method" value="put" />
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="maintenance_log_id" value="{{ $maintenance_log->id }}">
+                                      <div class="row">
+                                        <div class="col-xs-5">Brief Description
+                                          <input id="service_description" name="service_description" type="text" class="form-control" value="{{ $maintenance_log->service_description }}">
+                                        </div>
+                                        <div class="col-xs-3">{{ $equipment->hours_or_miles }}
+                                          <input id="usage_at_service" name="usage_at_service" type="number" step="0.01" min="0" class="form-control" value="{{ $maintenance_log->usage_at_service }}">
+                                        </div>
+                                        
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-xs-5">Serviced by
+                                          <input id="serviced_by" name="serviced_by" type="text" class="form-control" value="{{ $maintenance_log->serviced_by }}">
+                                        </div>
+                                        <div class="col-xs-3">Cost
+                                          <input id="service_cost" name="service_cost" type="number" step="0.01" min="0" class="form-control" value="{{ $maintenance_log->service_cost}}">
+                                        </div>
+                                      </div>Notes
+                                      <textarea id="service_notes" name="service_notes" class="form-control" rows="2">{{ $maintenance_log->service_notes }}</textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      <button form="form{{ $maintenance_log->id }}" type="submit" value="save" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+
+                @endforeach 
             </div>
         </div>
     </div>
