@@ -56,7 +56,13 @@
                             <label for="vin_number">VIN Number:</label>
                             <input class="form-control" id="vin_number" name="vin_number" type="text">
                           </div>
-                        </div>                
+                        </div>  
+                        <div class="form-group row">
+                          
+                          <input type="file" name="fileToUpload" id="fileToUpload">
+                          
+
+                        </div>              
 
                         <button type="submit" value="save" class="btn btn-default">Save</button>
 

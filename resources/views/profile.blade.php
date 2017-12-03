@@ -8,12 +8,14 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading col-sm-12">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
+                        <a href="{{url('/home')}}"><button type="button" class="btn btn-primary btn-md active">Home</button></a>
                         <a href="{{url('/list')}}" class="btn btn-primary btn-md active" role="button">Equipment List</a>
                     </div>
                     <div class="col-md-2">
                         <form class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
                             {{ csrf_field() }}
+
                             <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
                             <button class="btn btn-default btn-md {{ $favorite_class }}"><strong>&#9734;</strong></button>
                         </form>

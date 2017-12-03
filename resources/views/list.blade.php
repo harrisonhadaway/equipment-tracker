@@ -8,12 +8,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <a href="{{url('/home')}}"><button type="button" class="btn btn-primary btn-md active">Home</button></a>
-                    <div class="panel-body">          
+                </div>
+                             
         <!-- Make the view switchable between list or grid -->
-                        <ul class="list-group">
-                            @foreach ($equipment as $machine)    
+                    <ul class="list-group">
+                        @foreach ($equipment as $machine) 
+                            <li class="list-group-item">   
                             <div class="media" onclick="document.location= 'profile/{{ $machine->id }}'">
-                                <li class="list-group-item">
+                                
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="media-object" style="width:60px" src="#" onerror="this.src='../img/placeholder.jpg'" >
@@ -23,17 +25,20 @@
                                     <h4 class="media-heading">{{ $machine->year }} {{ $machine->make }} {{ $machine->model }}</h4>
                                     Last updated {{ $machine->last_update->diffForHumans() }}
                                 </div>
-                                </li>
-                            </div>    
+                                <div class="media-right">
+                                    <button>
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            </li>                            
                             @endforeach
                         </ul>
+                        
                     </div> 
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
 @endsection
 
 

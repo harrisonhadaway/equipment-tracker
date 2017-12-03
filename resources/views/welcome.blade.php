@@ -13,9 +13,9 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                background-color: #52616a;
+                color: #f0f5f9;
+                font-family: sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -78,12 +78,14 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title">
                     Equipment Tracker
                     
                 </div>
-                <p>A Harrison Hadaway Project.</p>
-                
+                <div style="padding-left: 250px; padding-right: 250px;">
+                <h4></h4>    
+                <p>Farmers, construction companies, equipment rental companies, and hobby collectors all have one thing in common: keeping proper documentation on the machinery that helps them get the job done every day. The lack of accurate documentation on these machines will cause a loss of profit from a machine breaking down from a lack of maintenance. <br> Also, the lack of maintenance documentation can hurt the re-sell value of your equipment as your company grows and needs bigger and better equipment. <br>That is why EquipmentTracker is here for you. Our custom online based portal provides the perfect place for records to be kept for your business to continue to prosper.</p>
+                </div>
             </div>
         </div>
     </body>
