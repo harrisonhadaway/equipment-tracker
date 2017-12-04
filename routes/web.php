@@ -18,28 +18,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/new', function() {
-	return view('new');
-});
-
-Route::post('/photoupload', 'EquipmentController@photoupload');
-
-
-
-Route::put('/profile/{id}/update', 'EquipmentController@update_log');
-
+Route::get('/list', 'EquipmentController@index');
 
 Route::get('/home', 'EquipmentController@favorites');
 
 Route::get('/profile/{id}', 'EquipmentController@show');
 
-
+Route::post('/profile/{id}', 'EquipmentController@newrecord');
 
 Route::put('/profile/{id}', 'EquipmentController@update');
 
-
-
-Route::post('/profile/{id}', 'EquipmentController@newrecord');
+Route::put('/profile/{id}/update', 'EquipmentController@update_log');
 
 Route::post('/profile/{id}/favorite', 'EquipmentController@favorite_equipment');
 
