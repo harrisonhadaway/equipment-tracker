@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Input;
 
 class EquipmentController extends Controller
 {
@@ -53,6 +54,14 @@ class EquipmentController extends Controller
         //
     }
 
+    public function photoupload(Request $request)
+    {
+        $file = Input::file('fileToUpload');
+        
+        
+        Storage::disk('s3')->put('/equipmenttrackerf17/' . 'testing2', file_get_contents($file));
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -61,6 +70,10 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->file('fileToUpload');
+        $file = Input::file('fileToUpload');
+
+        Storage::disk('s3')->put('/equipmenttrackerf17/' . 'loadedfromstore', file_get_contents($file));
         
         $equipment = new \App\Equipment;
         $equipment->owner_id = \Auth::user()->id;

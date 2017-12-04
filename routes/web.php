@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Support\Facades\Input;
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,6 +21,9 @@ Auth::routes();
 Route::get('/new', function() {
 	return view('new');
 });
+
+Route::post('/photoupload', 'EquipmentController@photoupload');
+
 
 
 Route::put('/profile/{id}/update', 'EquipmentController@update_log');

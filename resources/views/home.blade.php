@@ -13,6 +13,20 @@
                     <a href="{{url('/list')}}"><button type="button" class="btn btn-primary">List of Equipment</button></a>
                     
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newform">Add New Equipment</button>
+
+
+
+                    <form method="post" action="/photoupload" id="upload" enctype="multipart/form-data">
+                        
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <button form="upload" type="submit" value="save" class="btn btn-primary">Save changes</button>
+                    </form>
+
+
+
+
                 </div>
             </div>
         </div>

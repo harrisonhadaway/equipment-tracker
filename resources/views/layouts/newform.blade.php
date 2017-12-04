@@ -8,7 +8,8 @@
       </div>
       <div class="modal-body">
         
-        <form method="post" action="/equipment">
+        <form method="POST" action="/equipment" enctype="multipart/form-data">
+                       
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group row">
                           <div class="col-xs-4">
@@ -59,8 +60,8 @@
                         </div>  
                         <div class="form-group row">
                           
-                          <input type="file" name="fileToUpload" id="fileToUpload">
-                          
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                         
 
                         </div>              
 
