@@ -25,16 +25,11 @@
                                     <h4 class="media-heading">{{ $machine->year }} {{ $machine->make }} {{ $machine->model }}</h4>
                                     Last updated {{ $machine->last_update->diffForHumans() }}
                                 </div>
-                                <div class="media-right">
-                                    <button>
-                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                    </button>
-                                </div>
+                                
                             </div>
                             </li>                            
                             @endforeach
                         </ul>
-                        
                     </div> 
                 </div>
             </div>

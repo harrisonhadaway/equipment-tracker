@@ -59,12 +59,16 @@
                 <input class="form-control" id="vin_number" name="vin_number" type="text" value="{{ $equipment->vin_number }}">
               </div>
             </div>    
-
+        </form>
             <div class="modal-footer">
+              <form id="delete" class="button-form" method="delete" action="/delete/{{$equipment->id}}">
+              </form>
+                <button form="delete" type="submit" class="btn btn-danger pull-left">DELETE</button>
+              
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button form="update" type="submit" value="save" class="btn btn-primary">Save changes</button>
             </div>                      
-        </form>
+   
       </div>
     </div>
   </div>

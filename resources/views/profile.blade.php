@@ -24,9 +24,29 @@
                 
                 <div class="panel-body">
                     <div class="col-md-4" style="padding: 25px;">
-                        <img src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'" 
-                            style="border: solid; width:220px; height:auto;" >
+                       <!--  <img src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'" 
+                            style="border: solid; width:220px; height:auto;" > -->
+                            <!-- Trigger the Modal -->
+                            <img id="myImg" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:220px; height:auto;">
+
+                            <div class="modal fade" id="{{ $equipment->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"></h4>
+                              </div>
+                              <div class="modal-body">
+
+                              </div>
+                              <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button form="" type="submit" value="save" class="btn btn-primary">Save changes</button>
+                              </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
                     <div class="col-md-8">
                         <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
                        
@@ -118,11 +138,17 @@
                                       </div>Notes
                                       <textarea id="service_notes" name="service_notes" class="form-control" rows="2">{{ $maintenance_log->service_notes }}</textarea>
                                     </div>
+                                    </form>
                                     <div class="modal-footer">
+                                      <form id="deleteRecord{{$maintenance_log->id}}" class="button-form" method="delete" 
+                                        action="/deleteRecord/{{ $maintenance_log->id }}">
+                                      </form>
+                                      <button form="deleteRecord{{ $maintenance_log->id }}" type="submit" class="btn btn-danger pull-left">DELETE</button>
+
                                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                       <button form="form{{ $maintenance_log->id }}" type="submit" value="save" class="btn btn-primary">Save changes</button>
                                     </div>
-                                </form>
+                                
                             </div>
                           </div>
                         </div>

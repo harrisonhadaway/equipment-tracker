@@ -32,6 +32,10 @@ Route::put('/profile/{id}/update', 'EquipmentController@update_log');
 
 Route::post('/profile/{id}/favorite', 'EquipmentController@favorite_equipment');
 
+Route::get('/delete/{id}', 'EquipmentController@destroy');
+
+Route::get('/deleteRecord/{id}', 'EquipmentController@destroyRecord');
+
 Route::get('/list', 'EquipmentController@index');
 
 Route::resource('equipment', 'EquipmentController');

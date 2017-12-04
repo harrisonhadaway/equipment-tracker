@@ -24,9 +24,6 @@ class EquipmentController extends Controller
     public function index()
     {
         $storage = Storage::disk('s3');
-        $file = Storage::url('placeholder.jpg');
-
-        
         
         $user = \Auth::User()->id;
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get()->sortbydesc('created_at');
@@ -41,7 +38,7 @@ class EquipmentController extends Controller
             
         }
         
-         return view('list', compact('equipment', 'file'));
+         return view('list', compact('equipment'));
     }
 
 
@@ -73,12 +70,15 @@ class EquipmentController extends Controller
     public function store(Request $request)
     {
 
-        if(!$request->hasFile('file'))
-            return Response::json(['error' => 'No File Sent']);
+        // if(!$request->hasFile('file'))
+        //     //return Response::json(['error' => 'No File Sent']);
      
-        if(!$request->file('file')->isValid())
-            return Response::json(['error' => 'File is not valid']);
-     
+        // if(!$request->file('file')->isValid())
+        //     //return Response::json(['error' => 'File is not valid']);
+        $s3url = '';
+        if ($request->file('file') == !null) {
+            
+        
         $file = $request->file('file');
      
         $v = Validator::make(
@@ -86,8 +86,8 @@ class EquipmentController extends Controller
             ['file' => 'required|max:8000']
         );
      
-        if($v->fails())
-            return Response::json(['error' => $v->errors()]);
+        // if($v->fails())
+        //     return Response::json(['error' => $v->errors()]);
      
         // Resize photos???
         // Thumbnails??
@@ -116,7 +116,7 @@ class EquipmentController extends Controller
         //If we are still here we are good to go.
         // return Response::json(['OK' => 1]);
 
-        
+        }
         
         $equipment = new \App\Equipment;
         $equipment->owner_id = \Auth::user()->id;
@@ -131,7 +131,9 @@ class EquipmentController extends Controller
         $equipment->purchase_price = $request->input('purchase_price');
         $equipment->serial_number = $request->input('serial_number');
         $equipment->vin_number = $request->input('vin_number');
+        
         $equipment->imageurl = $s3url;
+        
         $equipment->save();
         return redirect('/home');
     }
@@ -163,7 +165,7 @@ class EquipmentController extends Controller
         $maintenance_logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->get();
         $maintenance_logs = $maintenance_logs->sortbydesc('created_at');
         $total_cost = $maintenance_logs->sum('service_cost');
-        
+       
         if($maintenance_logs->sortbydesc('created_at')->first() == !null) {
             $last_update = $maintenance_logs->sortbydesc('created_at')->first();
         } else $last_update = $equipment;
@@ -283,50 +285,31 @@ class EquipmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //hard delete function
+        $equipment = \App\Equipment::find($id);
+        $image = basename($equipment->imageurl);
+        Storage::disk('s3')->delete('/uploads/' . $image);
+        $logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->delete();
+        $equipment->delete();
+        return redirect('/list');
+
     }
 
-
-    public function storeimg(Gallery $gallery, Request $request)
+    public function destroyRecord($id)
     {
-        if(!$request->hasFile('file'))
-            return Response::json(['error' => 'No File Sent']);
-     
-        if(!$request->file('file')->isValid())
-            return Response::json(['error' => 'File is not valid']);
-     
-        $file = $request->file('file');
-     
-        $v = Validator::make(
-            $request->all(),
-            ['file' => 'required|mimes:jpeg,jpg|max:8000']
-        );
-     
-        if($v->fails())
-            return Response::json(['error' => $v->errors()]);
-     
-        //input a row into the database to track the image (if needed)
-        $image = $gallery->images()->create([
-            'id' => null,
-            'ext' => $request->file('file')->guessExtension()
-        ]);
-            
-        //Use some method to generate your filename here. Here we are just using the ID of the image
-        $filename = $image->id . '.' . $image->ext;
-     
-        //Push file to S3
-        Storage::disk('s3')->put('uploads/' . $filename, file_get_contents($file));
-     
-        //Use this line to move the file to local storage & make any thumbnails you might want
-        //$request->file('file')->move('/full/path/to/uploads', $filename);
-     
-        //Thumbnail as needed here. Then use method shown above to push thumbnails to S3
-     
-        //If making thumbnails uncomment these to remove the local copy.
-        //if(Storage::disk('s3')->exists('uploads/' . $filename))
-            //Storage::disk()->delete('uploads/' . $filename);
-     
-        //If we are still here we are good to go.
-        return Response::json(['OK' => 1]);
+        //hard delete function
+        
+        $log = \App\Maintenance_logs::find($id);
+
+        $id = $log->equipment_id;
+
+        $log->delete();
+
+        return redirect('/profile/' . $id);
+
     }
+
+
+    
+    
 }
