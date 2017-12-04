@@ -24,21 +24,15 @@ class EquipmentController extends Controller
     public function index()
     {
         $storage = Storage::disk('s3');
-        
         $user = \Auth::User()->id;
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get()->sortbydesc('created_at');
-
         foreach ($equipment as $machine) {
-
             $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
-            
             if($log == null) {
                 $machine->last_update = $machine->updated_at;
             } else $machine->last_update = $log->created_at;
-            
         }
-        
-         return view('list', compact('equipment'));
+        return view('list', compact('equipment'));
     }
 
 
@@ -53,14 +47,6 @@ class EquipmentController extends Controller
         //
     }
 
-    public function photoupload(Request $request)
-    {
-        $file = Input::file('fileToUpload');
-        
-        
-        Storage::disk('s3')->put('/equipmenttrackerf17/' . 'testing2', file_get_contents($file));
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -69,55 +55,16 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-
-        // if(!$request->hasFile('file'))
-        //     //return Response::json(['error' => 'No File Sent']);
-     
-        // if(!$request->file('file')->isValid())
-        //     //return Response::json(['error' => 'File is not valid']);
         $s3url = '';
         if ($request->file('file') == !null) {
-            
-        
-        $file = $request->file('file');
-     
-        $v = Validator::make(
-            $request->all(),
-            ['file' => 'required|max:8000']
-        );
-     
-        // if($v->fails())
-        //     return Response::json(['error' => $v->errors()]);
-     
-        // Resize photos???
-        // Thumbnails??
-
-        //input a row into the database to track the image (if needed)
-            // save $equipment->image = s3 url       
-
-        $ext = Input::file('file')->getClientOriginalExtension();
-        //Use some method to generate your filename here. Here we are just using the ID of the image
-        $filename = $request->year . rand(0,99) . \Auth::user()->id . '.' . $ext;
-     
-        $s3url = 'https://s3.us-east-2.amazonaws.com/equipmenttrackerf17/uploads/' . $filename;
-        //Push file to S3
-        Storage::disk('s3')->put('/uploads/' . $filename, file_get_contents($file));
-        
-     
-        //Use this line to move the file to local storage & make any thumbnails you might want
-        //$request->file('file')->move('/full/path/to/uploads', $filename);
-     
-        //Thumbnail as needed here. Then use method shown above to push thumbnails to S3
-     
-        //If making thumbnails uncomment these to remove the local copy.
-        //if(Storage::disk('s3')->exists('uploads/' . $filename))
-            //Storage::disk()->delete('uploads/' . $filename);
-     
-        //If we are still here we are good to go.
-        // return Response::json(['OK' => 1]);
-
+            $file = $request->file('file');
+            // Resize photos???
+            $ext = Input::file('file')->getClientOriginalExtension();
+            $filename = $request->year . rand(0,99) . \Auth::user()->id . '.' . $ext;
+            $s3url = 'https://s3.us-east-2.amazonaws.com/equipmenttrackerf17/uploads/' . $filename;
+            //Push file to S3
+            Storage::disk('s3')->put('/uploads/' . $filename, file_get_contents($file));
         }
-        
         $equipment = new \App\Equipment;
         $equipment->owner_id = \Auth::user()->id;
         $equipment->make = $request->input('make');
@@ -131,9 +78,7 @@ class EquipmentController extends Controller
         $equipment->purchase_price = $request->input('purchase_price');
         $equipment->serial_number = $request->input('serial_number');
         $equipment->vin_number = $request->input('vin_number');
-        
         $equipment->imageurl = $s3url;
-        
         $equipment->save();
         return redirect('/home');
     }
@@ -160,16 +105,13 @@ class EquipmentController extends Controller
      */
     public function show($id)
     {
-
         $equipment = \App\Equipment::find($id);
         $maintenance_logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->get();
         $maintenance_logs = $maintenance_logs->sortbydesc('created_at');
         $total_cost = $maintenance_logs->sum('service_cost');
-       
         if($maintenance_logs->sortbydesc('created_at')->first() == !null) {
             $last_update = $maintenance_logs->sortbydesc('created_at')->first();
         } else $last_update = $equipment;
-
             if($equipment->highlighted) {
             $favorite_class = 'favorited';
             }       
@@ -182,7 +124,6 @@ class EquipmentController extends Controller
             if($equipment->hours_or_miles == 'Miles') {
                 $miles_select = "checked=''";
             } else $miles_select = "";
-
         if ($equipment->owner_id == \Auth::user()->id) {
             return view('profile', compact('equipment', 'maintenance_logs', 'total_cost', 'favorite_class', 'hours_select','miles_select', 'last_update'));
         }
@@ -214,15 +155,11 @@ class EquipmentController extends Controller
     {
         $user = \Auth::User()->id;
         $favorites = \App\Equipment::where('highlighted', '=', true)->where('owner_id', '=', $user)->get();
-
         foreach ($favorites as $machine) {
-
             $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
-            
             if($machine->latestLog == null) {
                 $machine->last_update = $machine->updated_at;
             } else $machine->last_update = $log->created_at;
-            
         }
         return view('home', compact('favorites'));
     }
@@ -248,6 +185,19 @@ class EquipmentController extends Controller
     public function update(Request $request, $id)
     {
         $equipment = \App\Equipment::find($id);
+        $s3url = '';
+        if ($request->file('file') == !null) {
+            $file = $request->file('file');
+            $v = Validator::make(
+                $request->all(),
+                ['file' => 'required|max:8000']
+            );
+            $ext = Input::file('file')->getClientOriginalExtension();
+            $filename = $request->year . rand(0,99) . \Auth::user()->id . '.' . $ext;
+            $s3url = 'https://s3.us-east-2.amazonaws.com/equipmenttrackerf17/uploads/' . $filename;
+            Storage::disk('s3')->put('/uploads/' . $filename, file_get_contents($file));
+            $equipment->imageurl = $s3url;
+        }
         $equipment->make = $request->input('make');
         $equipment->model = $request->input('model');
         $equipment->year = $request->input('year');
@@ -297,16 +247,10 @@ class EquipmentController extends Controller
 
     public function destroyRecord($id)
     {
-        //hard delete function
-        
         $log = \App\Maintenance_logs::find($id);
-
         $id = $log->equipment_id;
-
         $log->delete();
-
         return redirect('/profile/' . $id);
-
     }
 
 

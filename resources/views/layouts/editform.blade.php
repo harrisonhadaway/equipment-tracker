@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">Update Equipment Info</h4>
       </div>
       <div class="modal-body">
-        <form id="update" method="post" action="{{action('EquipmentController@update',['id'=>$equipment->id])}}">
+        <form id="update" method="post" action="{{action('EquipmentController@update',['id'=>$equipment->id])}}" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="put" />
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="equipment_id" id="equipment_id" value="{{ $equipment->id }}">
@@ -58,6 +58,11 @@
                 <label for="vin_number">VIN Number:</label>
                 <input class="form-control" id="vin_number" name="vin_number" type="text" value="{{ $equipment->vin_number }}">
               </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-xs-5">
+              <strong>Equipment Photo Upload:</strong><input type="file" name="file" id="file">
+            </div>
             </div>    
         </form>
             <div class="modal-footer">

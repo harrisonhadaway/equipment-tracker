@@ -59,9 +59,9 @@
                           </div>
                         </div>  
                         <div class="form-group row">
-                          
-                        <input type="file" name="file" id="file">
-                         
+                          <div class="col-xs-5">
+                            <strong>Equipment Photo Upload:</strong><input type="file" name="file" id="file">
+                          </div>
 
                         </div>              
 

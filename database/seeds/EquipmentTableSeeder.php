@@ -26,6 +26,7 @@ class EquipmentTableSeeder extends Seeder
         	'purchase_price' => '12000',
         	'serial_number' => '123456789',
         	'vin_number' => '123456789',
+            'imageurl' => '',
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
@@ -43,6 +44,7 @@ class EquipmentTableSeeder extends Seeder
         	'purchase_price' => '10000',
         	'serial_number' => '123456789',
         	'vin_number' => '123456789',
+            'imageurl' => '',
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
@@ -59,6 +61,7 @@ class EquipmentTableSeeder extends Seeder
             'purchase_price' => '18000',
             'serial_number' => '123456789',
             'vin_number' => '123456789',
+            'imageurl' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -76,6 +79,7 @@ class EquipmentTableSeeder extends Seeder
             'purchase_price' => '10000',
             'serial_number' => '123456789',
             'vin_number' => '123456789',
+            'imageurl' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -92,6 +96,7 @@ class EquipmentTableSeeder extends Seeder
             'purchase_price' => '5000',
             'serial_number' => '123456789',
             'vin_number' => '123456789',
+            'imageurl' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
@@ -109,6 +114,7 @@ class EquipmentTableSeeder extends Seeder
             'purchase_price' => '150000',
             'serial_number' => '123456789',
             'vin_number' => '123456789',
+            'imageurl' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ]);
