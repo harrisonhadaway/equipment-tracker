@@ -18,7 +18,7 @@
                                 
                                 <div class="media-left">
                                     <a href="#">
-                                        <img class="media-object" style="width:60px" src="#" onerror="this.src='../img/placeholder.jpg'" >
+                                        <img class="media-object" style="width:60px" src="{{ $machine->imageurl }}" onerror="this.src='../img/placeholder.jpg'" >
                                     </a>
                                 </div>
                                 <div class="media-body">

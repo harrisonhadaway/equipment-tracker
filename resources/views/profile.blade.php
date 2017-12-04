@@ -24,8 +24,8 @@
                 
                 <div class="panel-body">
                     <div class="col-md-4" style="padding: 25px;">
-                        <img src="#" onerror="this.src='../img/placeholder.jpg'" 
-                            style="border: solid; width:150px; height:auto;" >
+                        <img src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'" 
+                            style="border: solid; width:220px; height:auto;" >
                     </div>
                     <div class="col-md-8">
                         <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>

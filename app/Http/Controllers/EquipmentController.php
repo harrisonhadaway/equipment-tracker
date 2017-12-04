@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
 
+use Validator;
 class EquipmentController extends Controller
 {
 
@@ -70,10 +72,51 @@ class EquipmentController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->file('fileToUpload');
-        $file = Input::file('fileToUpload');
 
-        Storage::disk('s3')->put('/equipmenttrackerf17/' . 'loadedfromstore', file_get_contents($file));
+        if(!$request->hasFile('file'))
+            return Response::json(['error' => 'No File Sent']);
+     
+        if(!$request->file('file')->isValid())
+            return Response::json(['error' => 'File is not valid']);
+     
+        $file = $request->file('file');
+     
+        $v = Validator::make(
+            $request->all(),
+            ['file' => 'required|max:8000']
+        );
+     
+        if($v->fails())
+            return Response::json(['error' => $v->errors()]);
+     
+        // Resize photos???
+        // Thumbnails??
+
+        //input a row into the database to track the image (if needed)
+            // save $equipment->image = s3 url       
+
+        $ext = Input::file('file')->getClientOriginalExtension();
+        //Use some method to generate your filename here. Here we are just using the ID of the image
+        $filename = $request->year . rand(0,99) . \Auth::user()->id . '.' . $ext;
+     
+        $s3url = 'https://s3.us-east-2.amazonaws.com/equipmenttrackerf17/uploads/' . $filename;
+        //Push file to S3
+        Storage::disk('s3')->put('/uploads/' . $filename, file_get_contents($file));
+        
+     
+        //Use this line to move the file to local storage & make any thumbnails you might want
+        //$request->file('file')->move('/full/path/to/uploads', $filename);
+     
+        //Thumbnail as needed here. Then use method shown above to push thumbnails to S3
+     
+        //If making thumbnails uncomment these to remove the local copy.
+        //if(Storage::disk('s3')->exists('uploads/' . $filename))
+            //Storage::disk()->delete('uploads/' . $filename);
+     
+        //If we are still here we are good to go.
+        // return Response::json(['OK' => 1]);
+
+        
         
         $equipment = new \App\Equipment;
         $equipment->owner_id = \Auth::user()->id;
@@ -88,6 +131,7 @@ class EquipmentController extends Controller
         $equipment->purchase_price = $request->input('purchase_price');
         $equipment->serial_number = $request->input('serial_number');
         $equipment->vin_number = $request->input('vin_number');
+        $equipment->imageurl = $s3url;
         $equipment->save();
         return redirect('/home');
     }

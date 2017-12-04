@@ -27,6 +27,7 @@ class EquipmentTable extends Migration
             $table->integer('purchase_price')->nullable();
             $table->char('serial_number', 30)->nullable();
             $table->char('vin_number', 30)->nullable();
+            $table->string('imageurl')->nullable();
             $table->timestamps();
 
         });    

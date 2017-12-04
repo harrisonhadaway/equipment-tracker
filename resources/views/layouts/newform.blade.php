@@ -60,7 +60,7 @@
                         </div>  
                         <div class="form-group row">
                           
-                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="file" name="file" id="file">
                          
 
                         </div>              
