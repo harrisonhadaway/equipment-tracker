@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Home</div>
 
                 <div class="panel-body">
                     <a href="{{url('/list')}}"><button type="button" class="btn btn-primary">List of Equipment</button></a>
@@ -24,7 +24,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Favorite Equipment</div>
 
-                    <ul class="list-group">
+                    <!-- <ul class="list-group">
                         
                         @foreach($favorites as $favorite)      
                         <li class="list-group-item">
@@ -42,8 +42,26 @@
                             </div>
                         </li>
                         @endforeach
-                    </ul>
+                    </ul> -->
+                    <div class="row">
+                    @foreach($favorites as $favorite)    
                     
+                      <div class="col-sm-6 col-md-6">
+
+                        <div class="thumbnail hover" onclick="document.location= 'profile/{{ $favorite->id }}'">
+                          <img style="height: 250px; width: auto;"  src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'">
+                          <div class="caption">
+                            <h4>{{ $favorite->year }} {{ $favorite->make }} {{ $favorite->model }}</h4>
+                            <p>Last updated {{ $favorite->last_update->diffForHumans() }}</p>
+                            <!-- <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
+                          </div>
+                        </div>
+                      </div>
+                   
+                    @endforeach
+                     </div>
+
+
 
             </div>
         </div>

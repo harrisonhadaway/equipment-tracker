@@ -33,7 +33,15 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
-                </div>
+
+                    </div>
+                    
+                     <!-- <ol class="breadcrumb">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">Library</a></li>
+                      <li class="active">Data</li>
+                    </ol> -->
+                
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->

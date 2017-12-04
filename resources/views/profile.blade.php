@@ -59,14 +59,15 @@
               </div>
             </div>
           </div>
+            <div class="table-responsive">
             <table class="table table-striped table-hover">
               <thead>
                 <tr>
                   <th>Service Description</th>
                   <th>Serviced by</th>
                   <th>{{ $equipment->hours_or_miles }}</th>
-                  <th>Date</th>
-                  <th>Cost</th>
+                  <th class="visible-xs-*">Date</th>
+                  <th class="visible-xs-*">Cost</th>
                 </tr>
               </thead>
               <tbody>
@@ -75,12 +76,13 @@
                     <td><strong>{{ $maintenance_log->service_description }}</strong></td>
                     <td>{{ $maintenance_log->serviced_by }}</td>
                     <td>{{ number_format($maintenance_log->usage_at_service) }}</td>
-                    <td>{{ date_format($maintenance_log->created_at,"m/d/Y") }}</td>
-                    <td>${{ number_format($maintenance_log->service_cost) }}</td>
+                    <td class="visible-xs-*">{{ date_format($maintenance_log->created_at,"m/d/Y") }}</td>
+                    <td class="visible-xs-*">${{ number_format($maintenance_log->service_cost) }}</td>
                   </tr>
                 @endforeach         
               </tbody>
             </table>
+          </div>
             @foreach($maintenance_logs as $maintenance_log)
             <div class="modal fade" id="{{ $maintenance_log->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">

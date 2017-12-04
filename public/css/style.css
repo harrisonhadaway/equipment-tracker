@@ -9,3 +9,7 @@ td:hover {
 li:hover {
 	cursor: pointer;
 }
+
+.hover:hover {
+	cursor: pointer;
+}

@@ -23,7 +23,6 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $storage = Storage::disk('s3');
         $user = \Auth::User()->id;
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get()->sortbydesc('created_at');
         foreach ($equipment as $machine) {
@@ -155,6 +154,7 @@ class EquipmentController extends Controller
     {
         $user = \Auth::User()->id;
         $favorites = \App\Equipment::where('highlighted', '=', true)->where('owner_id', '=', $user)->get();
+
         foreach ($favorites as $machine) {
             $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
             if($machine->latestLog == null) {
