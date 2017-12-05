@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @extends('layouts.newrecord')
 @extends('layouts.editform')
+@extends('layouts.files')
 
 @section('content')
 <div class="modal" id="bigpic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -55,7 +56,7 @@
                 <button href="#editform" type="button" class="btn btn-default" data-toggle="modal" data-target="#editform">Edit Info</button>
               </div>
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default">Export Info</button>
+                <button href="#filemodal" type="button" class="btn btn-default" data-toggle="modal" data-target="#filemodal">Documentation</button></a>
               </div>
             </div>
           </div>

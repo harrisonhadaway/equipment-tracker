@@ -1,3 +1,22 @@
+1. Record view/edit
+2. On list view pull the last updates time stamp. // ALSO the favorites list
+
+Improve list view
+create user manual upload
+dashboard functions.... All manual??
+buttons at the top of the profile 
+footer
+
+logic for possible breaks in the site 
+form validation from html5
+
+
+/welcome
+/demo
+
+
+
+
 
 XXProfile- has placeholer img in place. 
 - need profile built

@@ -96,6 +96,31 @@ class EquipmentController extends Controller
         return redirect('/profile/' . $request->input('equipment_id'));
     }
 
+    public function newfile(Request $request, $id)
+    {
+        $equipment_files = new \App\Equipment_files;
+        if ($request->file('file') == !null) {
+            $file = $request->file('file');
+            // Resize photos???
+            $ext = Input::file('file')->getClientOriginalExtension();
+            $filename = rand(0,1000) . \Auth::user()->id . '.' . $ext;
+            $s3url = 'https://s3.us-east-2.amazonaws.com/equipmenttrackerf17/userfiles/' . $filename;
+            //Push file to S3
+            Storage::disk('s3')->put('/userfiles/' . $filename, file_get_contents($file));
+
+            $equipment_files->fileurl = $s3url;
+        }
+        $equipment_files->equipment_id = $id;
+        $equipment_files->user_id = \Auth::user()->id;
+        $equipment_files->filename = $request->input('filename');
+        $equipment_files->save();
+        return redirect('/profile/' . $id);
+    }
+
+
+
+
+
     /**
      * Display the specified resource.
      *
@@ -123,8 +148,12 @@ class EquipmentController extends Controller
             if($equipment->hours_or_miles == 'Miles') {
                 $miles_select = "checked=''";
             } else $miles_select = "";
+ 
+
+        $files = \App\Equipment_files::where('equipment_id', '=', $equipment->id)->get();
+            
         if ($equipment->owner_id == \Auth::user()->id) {
-            return view('profile', compact('equipment', 'maintenance_logs', 'total_cost', 'favorite_class', 'hours_select','miles_select', 'last_update'));
+            return view('profile', compact('equipment', 'files', 'maintenance_logs', 'total_cost', 'favorite_class', 'hours_select','miles_select', 'last_update'));
         }
         return view('welcome');
     }

@@ -44,7 +44,7 @@
                         @endforeach
                     </ul> -->
                     <div class="row">
-                    @foreach($favorites as $favorite)    
+                    @forelse($favorites as $favorite)    
                     
                       <div class="col-sm-6 col-md-6">
 
@@ -57,8 +57,12 @@
                           </div>
                         </div>
                       </div>
+
+                    @empty
+                    <div class="col-md-10 col-md-offset-1">
+                        <h4>Your favorite pieces of equipnent go here! Making your life easy is what Equipment Tracker does for you!!</h4>
                    
-                    @endforeach
+                    @endforelse
                      </div>
 
 

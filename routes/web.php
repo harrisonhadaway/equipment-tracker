@@ -36,6 +36,8 @@ Route::get('/delete/{id}', 'EquipmentController@destroy');
 
 Route::get('/deleteRecord/{id}', 'EquipmentController@destroyRecord');
 
+Route::put('/fileupload/{id}', 'EquipmentController@newfile');
+
 Route::get('/list', 'EquipmentController@index');
 
 Route::resource('equipment', 'EquipmentController');
