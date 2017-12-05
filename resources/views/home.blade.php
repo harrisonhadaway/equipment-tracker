@@ -46,7 +46,7 @@
                     <div class="row">
                     @forelse($favorites as $favorite)    
                     
-                      <div class="col-sm-6 col-md-6">
+                      <div class="col-sm-6 col-md-6" style="padding-left: 5%; padding-right:5%; padding top: 5%; ">
 
                         <div class="thumbnail hover" onclick="document.location= 'profile/{{ $favorite->id }}'">
                           <img style="height: 250px; width: auto;"  src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'">

@@ -6,7 +6,7 @@
 @section('content')
 <div class="modal" id="bigpic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="image">
-    <img id="myImg" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:auto; height:auto;"> 
+    <img id="myImg" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:100%; height:auto;"> 
   </div>
 </div>
 <div class="container">
