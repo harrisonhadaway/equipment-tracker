@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Equipment Tracker</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -13,8 +13,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #52616a;
-                color: #f0f5f9;
+                background-color: white;
+                color: black;
                 font-family: sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -80,7 +80,6 @@
             <div class="content">
                 <div class="title">
                     Equipment Tracker
-                    
                 </div>
                 <div style="padding-left: 250px; padding-right: 250px;">
                 <h4></h4>    
