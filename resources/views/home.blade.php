@@ -49,7 +49,7 @@
                       <div class="col-sm-6 col-md-6" style="padding-left: 5%; padding-right:5%; padding top: 5%; ">
 
                         <div class="thumbnail hover" onclick="document.location= 'profile/{{ $favorite->id }}'">
-                          <img style="height: 250px; width: auto;"  src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'">
+                          <img style="height: auto; width: auto;"  src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'">
                           <div class="caption">
                             <h4>{{ $favorite->year }} {{ $favorite->make }} {{ $favorite->model }}</h4>
                             <p>Last updated {{ $favorite->last_update->diffForHumans() }}</p>
