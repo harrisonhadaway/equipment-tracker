@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">New Equipment</h4>
       </div>
       <div class="modal-body">
-        <form id="newform" method="POST" action="/equipment" enctype="multipart/form-data">         
+        <form id="newform1" method="POST" action="/equipment" enctype="multipart/form-data">         
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group row">
             <div class="col-xs-4">
@@ -63,7 +63,7 @@
         </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button form="newform" type="submit" value="save" class="btn btn-primary">Save changes</button>
+          <button form="newform1" type="submit" value="save" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
