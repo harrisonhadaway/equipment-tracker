@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.newform')
 @extends('layouts.newrecord')
 @extends('layouts.editform')
 @extends('layouts.files')

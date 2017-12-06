@@ -33,22 +33,24 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
-                    <a href="{{ url('home') }}"><button class="btn btn-default navbar-btn">Home</button></a>
-                    <a href="{{ url('list') }}"><button class="btn btn-default navbar-btn">All Equipment</button></a>
-
+                    <!-- <a href="{{ url('home') }}"><button class="btn btn-default navbar-btn">Home</button></a>
+                    <a href="{{ url('list') }}"><button class="btn btn-default navbar-btn">All Equipment</button></a> -->
+                        <!-- <a href="{{ url('home') }}"><button class="btn btn-default btn-sm navbar-btn"><span class="glyphicon glyphicon-home navbar-btn" aria-hidden="true"></span> Home</button></a> 
+                        <a href="{{ url('list') }}"><button class="btn btn-default btn-sm navbar-btn"><span class="glyphicon glyphicon-list navbar-btn" aria-hidden="true"></span> List</button></a>
+                        <a><button class="btn btn-default btn-sm navbar-btn"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Equipment</button></a> -->
+                    <!-- <ul class="nav navbar-nav">
+                      <li><a href="{{ url('home') }}"><span class="glyphicon glyphicon-home navbar-btn" aria-hidden="true"></span></a></li>
+                      <li><a href="{{ url('list') }}"><span class="glyphicon glyphicon-list navbar-btn" aria-hidden="true"></span></a></li>
+                    </ul> -->
                    
                     </div>
-                    
-                     <!-- <ol class="breadcrumb">
-                      <li><a href="#">Home</a></li>
-                      <li><a href="#">Library</a></li>
-                      <li class="active">Data</li>
-                    </ol> -->
-                
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li><a href="{{ url('home') }}"><span class="glyphicon glyphicon-home navbar-btn" aria-hidden="true"></span> Home</a></li>
+                        <li><a href="{{ url('list') }}"><span class="glyphicon glyphicon-list navbar-btn" aria-hidden="true"></span> List</a></li>
+                        <li><a data-toggle="modal" data-target="#newform"><span class="glyphicon glyphicon-plus navbar-btn" aria-hidden="true"></span> New Equipment</a></li>
                         &nbsp;
                     </ul>
 

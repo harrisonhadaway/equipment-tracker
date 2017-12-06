@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@extends('layouts.newform')
 @section('content')
 
 <div class="container">
