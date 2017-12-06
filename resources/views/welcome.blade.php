@@ -42,7 +42,7 @@
             }
 
             .title-height {
-                padding-top: 20vh;
+                padding-top: 8%;
             }
 
             .content-height {

@@ -15,49 +15,55 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading col-sm-12">
-          <div class="col-md-4">
-            <a href="{{url('/home')}}"><button type="button" class="btn btn-primary btn-md active">Home</button></a>
-            <a href="{{url('/list')}}" class="btn btn-primary btn-md active" role="button">Equipment List</a>
-          </div>
-          <div class="col-md-2">
-            <form class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
+          <div class="row">
+            <div class="col-xs-8">
+              <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
+            </div>
+            <div class="col-xs-2 text-center">
+              <button class="pull-right btn btn-default btn-md {{ $favorite_class }}"><strong>&#9734;</strong></button>
+            </div>
+            <form id="star" class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
               {{ csrf_field() }}
               <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
-              <button class="btn btn-default btn-md {{ $favorite_class }}"><strong>&#9734;</strong></button>
+              
             </form>
           </div>
         </div>
         <div class="panel-body">
-          <div class="col-md-4" style="padding: 25px;">
-            <a data-toggle="modal" data-target="#bigpic"><img src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:220px; height:auto;"></a>
-          </div>
-          <div class="col-md-8">
-              <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
-             
-              <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
+          <div class="row">
+            <div class="col-md-6" style="padding: 25px;">
+              <a data-toggle="modal" data-target="#bigpic"><img src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:200px; height:auto;"></a>
+            </div>
             
-          </div>
-          <div class="col-md-4 ">
-              <strong>Purchase date:</strong> {{ $equipment->purchase_date }} <br>
-              <strong>Purchase from:</strong> {{ $equipment->purchase_from }} <br>
-              <strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ number_format($equipment->purchase_usage) }}
-          </div>
-          <div class="col-md-4">
-              <strong>Maintenance Cost:</strong> ${{ number_format($total_cost) }} <br>
-              <strong>S/N:</strong> {{ $equipment->serial_number }} <br>
-              <strong>VIN:</strong> {{ $equipment->vin_number }}
+                
+               
+<!--                 <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
+ -->              
+            
+            <div class="col-md-6">
+                <strong>Purchase date:</strong> {{ $equipment->purchase_date }} <br>
+                <strong>Purchase from:</strong> {{ $equipment->purchase_from }} <br>
+                <strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ number_format($equipment->purchase_usage) }}
+           
+                <strong>Maintenance Cost:</strong> ${{ number_format($total_cost) }} <br>
+                <strong>S/N:</strong> {{ $equipment->serial_number }} <br>
+                <strong>VIN:</strong> {{ $equipment->vin_number }}
+            </div>
           </div>
         </div>
           <div>
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addrecord">Add Maintenance Record</button>
+                <button type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#addrecord">Add Maintenance Record</button>
+                <button type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
               </div>
               <div class="btn-group" role="group">
-                <button href="#editform" type="button" class="btn btn-default" data-toggle="modal" data-target="#editform">Edit Info</button>
+                <button href="#editform" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#editform">Edit Info</button>
+                <button href="#editform" type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
               </div>
               <div class="btn-group" role="group">
-                <button href="#filemodal" type="button" class="btn btn-default" data-toggle="modal" data-target="#filemodal">Documentation</button></a>
+                <button href="#filemodal" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#filemodal">Documentation</button></a>
+                <button href="#filemodal" type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#filemodal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button></a>
               </div>
             </div>
           </div>
@@ -66,20 +72,20 @@
               <thead>
                 <tr>
                   <th>Service Description</th>
-                  <th>Serviced by</th>
-                  <th>{{ $equipment->hours_or_miles }}</th>
-                  <th class="visible-xs-*">Date</th>
-                  <th class="visible-xs-*">Cost</th>
+                  <th class="hidden-xs">Serviced by</th>
+                  <th class="hidden-xs">{{ $equipment->hours_or_miles }}</th>
+                  <th>Date</th>
+                  <th class="hidden-xs">Cost</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach($maintenance_logs as $maintenance_log)
                   <tr class="media" onclick="$('#{{ $maintenance_log->id }}').modal('show')">
                     <td><strong>{{ $maintenance_log->service_description }}</strong></td>
-                    <td>{{ $maintenance_log->serviced_by }}</td>
-                    <td>{{ number_format($maintenance_log->usage_at_service) }}</td>
-                    <td class="visible-xs-*">{{ date_format($maintenance_log->created_at,"m/d/Y") }}</td>
-                    <td class="visible-xs-*">${{ number_format($maintenance_log->service_cost) }}</td>
+                    <td class="hidden-xs">{{ $maintenance_log->serviced_by }}</td>
+                    <td class="hidden-xs">{{ number_format($maintenance_log->usage_at_service) }}</td>
+                    <td>{{ date_format($maintenance_log->created_at,"m/d/Y") }}</td>
+                    <td class="hidden-xs">${{ number_format($maintenance_log->service_cost) }}</td>
                   </tr>
                 @endforeach         
               </tbody>
