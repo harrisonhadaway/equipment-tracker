@@ -18,28 +18,28 @@
           </div>
         </div>
         <hr>
-        <form id="newfile" method="post" action="{{action('EquipmentController@newfile',['id'=>$equipment->id])}}" enctype="multipart/form-data">
+        <form date-toggle="validator" role="form" id="newfile" method="post" action="{{action('EquipmentController@newfile',['id'=>$equipment->id])}}" enctype="multipart/form-data">
           <input type="hidden" name="_method" value="put" />
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group row">
-            <div class="col-md-4">
+            <div class="col-xs-4">
               <label for="filename">File Name:</label>
             </div>
-            <div class="col-md-5">
-              <label for="file">Select File:</label>
+            <div class="col-xs-5">
+              <label class="hidden-xs" for="file">Select File:</label>
             </div>
-            <div class="col-md-3">
+            <div class="col-xs-3">
             </div>
           </div>    
           <div class="form-group row">
             <div class="col-xs-4">
-              <input type="text" class="form-control" name="filename" id="filename" placeholder="Owner's Manual">
+              <input type="text" class="form-control-text" name="filename" id="filename" placeholder="Owner's Manual" required><br>
             </div>
-            <div class="col-xs-5 form-group">
-              <input type="file" class="form-control-file" name="file" id="file">
+            <div class="col-sm-5 form-group">
+              <input type="file" class="form-control-file" name="file" id="file" required>
             </div>
-            <div class="col-xs-3">
-              <button form="newfile" type="submit" value="save" class="btn btn-sm btn-primary">Save File</button>
+            <div class="col-sm-3">
+              <button data-disable form="newfile" type="submit" value="save" class="btn btn-sm btn-primary">Save File</button>
             </div>
           </div>    
         </form>

@@ -3,18 +3,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Maintenance Record</h4>
+        <h4 class="modal-title" id="myModalLabel">Add Service Record</h4>
       </div>
       <div class="modal-body">
-        <form method="POST" action="/profile/{id}" id="record">
+        <form data-toggle="validator" method="POST" action="/profile/{id}" id="record">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="equipment_id" value="{{ $equipment->id }}">
               <div class="row">
                 <div class="col-xs-5">Brief Description
-                  <input id="service_description" name="service_description" type="text" class="form-control" placeholder="Oil Change">
+                  <input id="service_description" name="service_description" type="text" class="form-control" placeholder="Oil Change" required>
                 </div>
                 <div class="col-xs-3">{{ $equipment->hours_or_miles }}
-                  <input id="usage_at_service" name="usage_at_service" type="number" step="0.01" min="0" class="form-control" placeholder="1,234">
+                  <input id="usage_at_service" name="usage_at_service" type="number" step="0.01" min="0" class="form-control" placeholder="1,234" required>
                 </div>
                 
               </div>

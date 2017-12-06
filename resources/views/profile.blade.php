@@ -16,35 +16,32 @@
       <div class="panel panel-default">
         <div class="panel-heading col-sm-12">
           <div class="row">
-            <div class="col-xs-8">
+            <div class="col-xs-12 ">
               <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
+              <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
             </div>
-            
-           
           </div>
         </div>
         <div class="panel-body">
           <div class="row">
-            <div class="col-md-6" style="padding: 25px;">
-              <a data-toggle="modal" data-target="#bigpic"><img src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:200px; height:auto;"></a>
-            </div>
+            <div class="col-sm-6" style="padding: 25px;">
+              <a data-toggle="modal" data-target="#bigpic"><img class="img-responsive center-block" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"></a>
+            </div> 
+          
+          
             
-                
-               
-<!--                 <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
- -->              
-            
-            <div class="col-md-6">
-                <strong>Purchase date:</strong> {{ $equipment->purchase_date }} <br>
-                <strong>Purchase from:</strong> {{ $equipment->purchase_from }} <br>
-                <strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ number_format($equipment->purchase_usage) }}
-           
-                <strong>Maintenance Cost:</strong> ${{ number_format($total_cost) }} <br>
-                <strong>S/N:</strong> {{ $equipment->serial_number }} <br>
-                <strong>VIN:</strong> {{ $equipment->vin_number }}
+            <div class="col-sm-5 col-xs-offset-1" style="padding-top: 25px;">
+              <ul class="list-unstyled">
+                <li><strong>Purchase date:</strong> {{ $equipment->purchase_date }}</li>
+                <li><strong>Purchase from:</strong> {{ $equipment->purchase_from }}</li>
+                <li><strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ number_format($equipment->purchase_usage) }}</li>
+                <li><strong>Maintenance Cost:</strong> ${{ number_format($total_cost) }}</li>
+                <li><strong>S/N:</strong> {{ $equipment->serial_number }}</li>
+                <li><strong>VIN:</strong> {{ $equipment->vin_number }}</li>
+              </ul>
             </div>
           </div>
-        </div>
+    
           <div class="row">
             <div class="btn-tool-bar btn-group-justified col-xs-8" role="toolbar" aria-label="...">
               <div class="btn-group" role="group">
@@ -103,13 +100,13 @@
                     <h4 class="modal-title" id="myModalLabel">{{ $maintenance_log->service_description }}</h4>
                   </div>
                   <div class="modal-body">
-                    <form method="POST" action="/profile/{{ $equipment->id }}/update" id="form{{ $maintenance_log->id }}">
+                    <form data-toggle="validator" method="POST" action="/profile/{{ $equipment->id }}/update" id="form{{ $maintenance_log->id }}">
                       <input type="hidden" name="_method" value="put" />
                       <input type="hidden" name="_token" value="{{ csrf_token() }}">
                       <input type="hidden" name="maintenance_log_id" value="{{ $maintenance_log->id }}">
                       <div class="row">
                         <div class="col-xs-5">Brief Description
-                          <input id="service_description" name="service_description" type="text" class="form-control" value="{{ $maintenance_log->service_description }}">
+                          <input id="service_description" name="service_description" type="text" class="form-control" value="{{ $maintenance_log->service_description }}" required>
                         </div>
                         <div class="col-xs-3">{{ $equipment->hours_or_miles }}
                           <input id="usage_at_service" name="usage_at_service" type="number" step="0.01" min="0" class="form-control" value="{{ $maintenance_log->usage_at_service }}">

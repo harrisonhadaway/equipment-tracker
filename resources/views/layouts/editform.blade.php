@@ -7,22 +7,22 @@
         <h4 class="modal-title" id="myModalLabel">Update Equipment Info</h4>
       </div>
       <div class="modal-body">
-        <form id="update" method="post" action="{{action('EquipmentController@update',['id'=>$equipment->id])}}" enctype="multipart/form-data">
+        <form data-toggle="validator" id="update" method="post" action="{{action('EquipmentController@update',['id'=>$equipment->id])}}" enctype="multipart/form-data">
             <input type="hidden" name="_method" value="put" />
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <input type="hidden" name="equipment_id" id="equipment_id" value="{{ $equipment->id }}">
             <div class="form-group row">
               <div class="col-xs-4">
                 <label for="make">Make</label>
-                <input class="form-control" id="make" name="make" type="text" value="{{ $equipment->make }}">
+                <input class="form-control" id="make" name="make" type="text" value="{{ $equipment->make }}" required>
               </div>
               <div class="col-xs-4">
                 <label for="model">Model</label>
-                <input class="form-control" id="model" name="model" type="text" value="{{ $equipment->model }}">
+                <input class="form-control" id="model" name="model" type="text" value="{{ $equipment->model }}" required>
               </div>
               <div class="col-xs-4">
                 <label for="year">Year</label>
-                <input class="form-control" id="year" name="year" type="text" value="{{ $equipment->year }}">
+                <input class="form-control" id="year" name="year" type="text" value="{{ $equipment->year }}" required>
               </div>
             </div>
             <div class="form-group row">

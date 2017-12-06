@@ -7,20 +7,20 @@
         <h4 class="modal-title" id="myModalLabel">New Equipment</h4>
       </div>
       <div class="modal-body">
-        <form id="newform1" method="POST" action="/equipment" enctype="multipart/form-data">         
+        <form data-toggle="validator" id="newform1" method="POST" action="/equipment" enctype="multipart/form-data">         
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group row">
             <div class="col-xs-4">
               <label for="make">Make</label>
-              <input class="form-control" id="make" name="make" type="text">
+              <input class="form-control" id="make" name="make" type="text" required>
             </div>
             <div class="col-xs-4">
               <label for="model">Model</label>
-              <input class="form-control" id="model" name="model" type="text">
+              <input class="form-control" id="model" name="model" type="text" required>
             </div>
             <div class="col-xs-4">
               <label for="year">Year</label>
-              <input class="form-control" id="year" name="year" type="text">
+              <input class="form-control" id="year" name="year" type="text" required>
             </div>
           </div>
           <div class="form-group row">
