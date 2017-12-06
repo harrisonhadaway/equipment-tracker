@@ -24,14 +24,16 @@ class EquipmentController extends Controller
     public function index()
     {
         $user = \Auth::User()->id;
+       
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get()->sortbydesc('created_at');
+        $total = count($equipment);
         foreach ($equipment as $machine) {
             $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
             if($log == null) {
                 $machine->last_update = $machine->updated_at;
             } else $machine->last_update = $log->created_at;
         }
-        return view('list', compact('equipment'));
+        return view('list', compact('equipment', 'total'));
     }
 
 
@@ -79,7 +81,7 @@ class EquipmentController extends Controller
         $equipment->vin_number = $request->input('vin_number');
         $equipment->imageurl = $s3url;
         $equipment->save();
-        return redirect('/home');
+        return redirect('/list');
     }
 
     public function newrecord(Request $request)
@@ -182,15 +184,24 @@ class EquipmentController extends Controller
     public function favorites()
     {
         $user = \Auth::User()->id;
-        $favorites = \App\Equipment::where('highlighted', '=', true)->where('owner_id', '=', $user)->get();
 
+        $equipment = \App\Equipment::where('owner_id', '=', $user)->get();
+        $purchase_total = $equipment->sum('purchase_price');
+
+        foreach ($equipment as $machine) {
+            $logs = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get();
+            $machine->cost = $logs->sum('service_cost');
+        }
+        $maintenance_cost = $equipment->sum('cost');
+
+        $favorites = \App\Equipment::where('highlighted', '=', true)->where('owner_id', '=', $user)->get();
         foreach ($favorites as $machine) {
             $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
             if($machine->latestLog == null) {
                 $machine->last_update = $machine->updated_at;
             } else $machine->last_update = $log->created_at;
         }
-        return view('home', compact('favorites'));
+        return view('home', compact('favorites', 'purchase_total', 'maintenance_cost'));
     }
 
     /**

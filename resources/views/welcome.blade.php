@@ -110,9 +110,9 @@
                     <h1>Equipment Tracker</h1>
                 </div>
                 <div class="position-ref content">
-                    Create each piece of equipment a 'profile page'. Add records and all other equipment documentation to one central location. Utilizing Equipment Tracker your records will be accessible from anywhere in world.
+                    Create each piece of equipment a 'profile page'. <br><br>Add records and all other equipment documentation to one central location. <br><br> Utilizing Equipment Tracker your records will be accessible from anywhere in world.
                 </div>
-                <div class="position-ref content" style="padding-top: 10%;">
+                <div class="position-ref content" style="padding-top: 5%;">
                     <H2>Go ahead register and give us a try!</H2>
                 </div>
                 <div class="position-ref content">

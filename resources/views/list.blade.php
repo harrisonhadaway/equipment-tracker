@@ -7,7 +7,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <a href="{{url('/home')}}"><button type="button" class="btn btn-primary btn-md active">Home</button></a>
+                    All Equipment <span class="badge">{{ $total }}</span>
                 </div>
                 <ul class="list-group">
                     @forelse ($equipment as $machine) 

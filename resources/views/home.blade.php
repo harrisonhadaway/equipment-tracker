@@ -7,12 +7,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Home</div>
-
+                <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
-                    <a href="{{url('/list')}}"><button type="button" class="btn btn-primary">List of Equipment</button></a>
-                    
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newform">Add New Equipment</button>
+                    <h4>Total maintenance cost ${{ number_format($maintenance_cost) }}.</h4>
+                    <h4>Purchase price total of all equipment ${{ number_format($purchase_total) }}.</h4><br>
                 </div>
             </div>
         </div>
@@ -23,50 +21,39 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Favorite Equipment</div>
-
-                    <!-- <ul class="list-group">
-                        
-                        @foreach($favorites as $favorite)      
-                        <li class="list-group-item">
-                            <div class="media" onclick="document.location= 'profile/{{ $favorite->id }}'">
-                                <div class="media-left">
-                                    <a href="#">
-                                        <img class="media-object" style="width:60px" 
-                                        src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'" >
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">{{ $favorite->year }} {{ $favorite->make }} {{ $favorite->model }}</h4>
-                                    Last updated {{ $favorite->last_update->diffForHumans() }}
-                                </div>
+                <ul class="list-group">
+                    @forelse($favorites as $favorite)      
+                    <li class="list-group-item">
+                        <div class="media" onclick="document.location= 'profile/{{ $favorite->id }}'">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" style="width:100px" 
+                                    src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'" >
+                                </a>
                             </div>
-                        </li>
-                        @endforeach
-                    </ul> -->
-                    <div class="row">
-                    @forelse($favorites as $favorite)    
-                    
-                      <div class="col-sm-6 col-md-6" style="padding-left: 5%; padding-right:5%; padding top: 5%; ">
-
-                        <div class="thumbnail hover" onclick="document.location= 'profile/{{ $favorite->id }}'">
-                          <img style="height: auto; width: auto;"  src="{{ $favorite->imageurl }}" onerror="this.src='../img/placeholder.jpg'">
-                          <div class="caption">
-                            <h4>{{ $favorite->year }} {{ $favorite->make }} {{ $favorite->model }}</h4>
-                            <p>Last updated {{ $favorite->last_update->diffForHumans() }}</p>
-                            <!-- <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> -->
-                          </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ $favorite->year }} {{ $favorite->make }} {{ $favorite->model }}</h4>
+                                Last updated {{ $favorite->last_update->diffForHumans() }}
+                            </div>
                         </div>
-                      </div>
-
+                    </li>
                     @empty
-                    <div class="col-md-10 col-md-offset-1">
-                        <h4>Your favorite pieces of equipnent go here! Making your life easy is what Equipment Tracker does for you!!</h4>
-                   
+                    <li class="list-group-item">
+                        <div class="media" onclick="document.location= '#'">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" style="width:100px" 
+                                    src="#" onerror="this.src='../img/placeholder.jpg'" >
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Favorited Equipment shows up here in a list.</h4>
+                                Making it easy to access records on the go!
+                            </div>
+                        </div>
+                    </li> 
                     @endforelse
-                     </div>
-
-
-
+                </ul> 
             </div>
         </div>
     </div>
