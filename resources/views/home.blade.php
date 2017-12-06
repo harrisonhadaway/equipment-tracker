@@ -20,7 +20,8 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Favorite Equipment</div>
+                <div class="panel-heading"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Favorite Equipment 
+                </div>
                 <ul class="list-group">
                     @forelse($favorites as $favorite)      
                     <li class="list-group-item">

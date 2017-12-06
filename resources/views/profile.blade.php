@@ -19,14 +19,8 @@
             <div class="col-xs-8">
               <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
             </div>
-            <div class="col-xs-2 text-center">
-              <button class="pull-right btn btn-default btn-md {{ $favorite_class }}"><strong>&#9734;</strong></button>
-            </div>
-            <form id="star" class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
-              {{ csrf_field() }}
-              <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
-              
-            </form>
+            
+           
           </div>
         </div>
         <div class="panel-body">
@@ -51,24 +45,33 @@
             </div>
           </div>
         </div>
-          <div>
-            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="row">
+            <div class="btn-tool-bar btn-group-justified col-xs-8" role="toolbar" aria-label="...">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#addrecord">Add Maintenance Record</button>
+                <button type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Service Record</button>
                 <button type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
               </div>
               <div class="btn-group" role="group">
-                <button href="#editform" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#editform">Edit Info</button>
+                <button href="#editform" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Info</button>
                 <button href="#editform" type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
               </div>
               <div class="btn-group" role="group">
-                <button href="#filemodal" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#filemodal">Documentation</button></a>
+                <button href="#filemodal" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#filemodal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Documentation</button></a>
                 <button href="#filemodal" type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#filemodal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button></a>
               </div>
+              <div class="btn-group" role="group">
+                 <button form="star" class="btn btn-default hidden-xs {{ $favorite_class }}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Favorite</button>
+                 <button form="star" class="btn btn-default visible-xs {{ $favorite_class }}">&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+              </div>
             </div>
+            <form id="star" class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
+                    {{ csrf_field() }}
+                  <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
+            </form>
           </div>
+     
             <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-hover">
               <thead>
                 <tr>
                   <th>Service Description</th>
