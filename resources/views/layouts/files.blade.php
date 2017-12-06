@@ -33,10 +33,10 @@
           </div>    
           <div class="form-group row">
             <div class="col-xs-4">
-              <input type="text" name="filename" id="filename" placeholder="Owner's Manual">
+              <input type="text" class="form-control" name="filename" id="filename" placeholder="Owner's Manual">
             </div>
-            <div class="col-xs-5">
-              <input type="file" name="file" id="file">
+            <div class="col-xs-5 form-group">
+              <input type="file" class="form-control-file" name="file" id="file">
             </div>
             <div class="col-xs-3">
               <button form="newfile" type="submit" value="save" class="btn btn-sm btn-primary">Save File</button>

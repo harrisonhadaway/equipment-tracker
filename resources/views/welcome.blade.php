@@ -8,6 +8,7 @@
         <title>Equipment Tracker</title>
 
         <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Lora:700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
@@ -19,10 +20,34 @@
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
+                overflow-x: hidden; 
+                overflow-y: auto;
             }
 
-            .full-height {
-                height: 100vh;
+            ul {
+    width: 70%;
+    margin: auto;
+}
+
+            .fixleft{
+            position:fixed;
+            bottom:0px;
+            left:50%;
+            }
+
+            .fixright{
+            position:fixed;
+            bottom:0px;
+            right:50%;
+            }
+
+            .title-height {
+                padding-top: 20vh;
+            }
+
+            .content-height {
+                height: 10vh;
+                margin-left: 20%;
             }
 
             .flex-center {
@@ -43,6 +68,8 @@
 
             .content {
                 text-align: center;
+                margin-left: 20%;
+                margin-right: 20%;
             }
 
             .title {
@@ -65,6 +92,7 @@
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -77,15 +105,22 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title">
-                    Equipment Tracker
+            <div class="">
+                <div class="flex-center title-height">
+                    <h1>Equipment Tracker</h1>
                 </div>
-                <div style="padding-left: 250px; padding-right: 250px;">
-                <h4></h4>    
-                <p>Farmers, construction companies, equipment rental companies, and hobby collectors all have one thing in common: keeping proper documentation on the machinery that helps them get the job done every day. The lack of accurate documentation on these machines will cause a loss of profit from a machine breaking down from a lack of maintenance. <br> Also, the lack of maintenance documentation can hurt the re-sell value of your equipment as your company grows and needs bigger and better equipment. <br>That is why EquipmentTracker is here for you. Our custom online based portal provides the perfect place for records to be kept for your business to continue to prosper.</p>
+                <div class="position-ref content">
+                    Create each piece of equipment a 'profile page'. Add records and all other equipment documentation to one central location. Utilizing Equipment Tracker your records will be accessible from anywhere in world.
+                </div>
+                <div class="position-ref content" style="padding-top: 10%;">
+                    <H2>Go ahead register and give us a try!</H2>
+                </div>
+                <div class="position-ref content">
+                    <img src="../img/tractor.png" class="fixright" style="height: auto; width: 30%;">
+                    <img src="../img/truck.png" class="fixleft" style="height: auto; width: 35%;">
                 </div>
             </div>
         </div>
     </body>
+    <script src="{{ asset('js/app.js') }}"></script>
 </html>

@@ -33,7 +33,10 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    <a href="{{ url('home') }}"><button class="btn btn-default navbar-btn">Home</button></a>
+                    <a href="{{ url('list') }}"><button class="btn btn-default navbar-btn">All Equipment</button></a>
 
+                   
                     </div>
                     
                      <!-- <ol class="breadcrumb">
