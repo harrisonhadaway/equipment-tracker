@@ -10,21 +10,14 @@ use Illuminate\Support\Facades\Response;
 use Validator;
 class EquipmentController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = \Auth::User()->id;
-       
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get()->sortbydesc('created_at');
         $total = count($equipment);
         foreach ($equipment as $machine) {
@@ -35,25 +28,7 @@ class EquipmentController extends Controller
         }
         return view('list', compact('equipment', 'total'));
     }
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $s3url = '';
@@ -86,7 +61,6 @@ class EquipmentController extends Controller
 
     public function newrecord(Request $request)
     {
-        
         $maintenance_logs = new \App\Maintenance_logs;
         $maintenance_logs->equipment_id = $request->input('equipment_id');
         $maintenance_logs->service_description = $request->input('service_description');
@@ -103,13 +77,10 @@ class EquipmentController extends Controller
         $equipment_files = new \App\Equipment_files;
         if ($request->file('file') == !null) {
             $file = $request->file('file');
-            // Resize photos???
             $ext = Input::file('file')->getClientOriginalExtension();
             $filename = rand(0,1000) . \Auth::user()->id . '.' . $ext;
             $s3url = 'https://s3.us-east-2.amazonaws.com/equipmenttrackerf17/userfiles/' . $filename;
-            //Push file to S3
             Storage::disk('s3')->put('/userfiles/' . $filename, file_get_contents($file));
-
             $equipment_files->fileurl = $s3url;
         }
         $equipment_files->equipment_id = $id;
@@ -118,17 +89,7 @@ class EquipmentController extends Controller
         $equipment_files->save();
         return redirect('/profile/' . $id);
     }
-
-
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show($id)
     {
         $equipment = \App\Equipment::find($id);
@@ -150,10 +111,7 @@ class EquipmentController extends Controller
             if($equipment->hours_or_miles == 'Miles') {
                 $miles_select = "checked=''";
             } else $miles_select = "";
- 
-
         $files = \App\Equipment_files::where('equipment_id', '=', $equipment->id)->get();
-            
         if ($equipment->owner_id == \Auth::user()->id) {
             return view('profile', compact('equipment', 'files', 'maintenance_logs', 'total_cost', 'favorite_class', 'hours_select','miles_select', 'last_update'));
         }
@@ -179,21 +137,18 @@ class EquipmentController extends Controller
             $favorite_class = '';
         }
         return redirect('/profile/' . $id);
-
     }
+
     public function favorites()
     {
         $user = \Auth::User()->id;
-
         $equipment = \App\Equipment::where('owner_id', '=', $user)->get();
         $purchase_total = $equipment->sum('purchase_price');
-
         foreach ($equipment as $machine) {
             $logs = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get();
             $machine->cost = $logs->sum('service_cost');
-        }
+            }
         $maintenance_cost = $equipment->sum('cost');
-
         $favorites = \App\Equipment::where('highlighted', '=', true)->where('owner_id', '=', $user)->get();
         foreach ($favorites as $machine) {
             $log = \App\Maintenance_logs::where('equipment_id', '=', $machine->id)->get()->sortbydesc('created_at')->first(); 
@@ -204,24 +159,6 @@ class EquipmentController extends Controller
         return view('home', compact('favorites', 'purchase_total', 'maintenance_cost'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $equipment = \App\Equipment::find($id);
@@ -262,27 +199,27 @@ class EquipmentController extends Controller
         $maintenance_logs->service_cost = $request->input('service_cost');
         $maintenance_logs->service_notes = $request->input('service_notes');
         $maintenance_logs->save();
-        
-        
         return redirect('/profile/' . $maintenance_logs->equipment_id); 
-
     }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
-        //hard delete function
         $equipment = \App\Equipment::find($id);
+        $files = \App\Equipment_files::where('equipment_id', '=', $equipment->id)->get();
+        if($files){
+            foreach ($files as $file) {
+                $name = basename($file->fileurl);
+                Storage::disk('s3')->delete('/userfiles/' . $name); 
+            }
+            $files = \App\Equipment_files::where('equipment_id', '=', $equipment->id)->delete();
+        }
         $image = basename($equipment->imageurl);
-        Storage::disk('s3')->delete('/uploads/' . $image);
+        if($image){
+            Storage::disk('s3')->delete('/uploads/' . $image);
+        }
         $logs = \App\Maintenance_logs::where('equipment_id', '=', $equipment->id)->delete();
         $equipment->delete();
         return redirect('/list');
-
     }
 
     public function destroyRecord($id)
@@ -291,9 +228,5 @@ class EquipmentController extends Controller
         $id = $log->equipment_id;
         $log->delete();
         return redirect('/profile/' . $id);
-    }
-
-
-    
-    
+    }  
 }

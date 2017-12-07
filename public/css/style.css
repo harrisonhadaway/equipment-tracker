@@ -1,5 +1,5 @@
 .favorited {
-  background-color: #FBFFB9;
+  background-color: #cff0da;
 }
 
 td:hover {
@@ -17,37 +17,10 @@ li:hover {
 .navbar-brand {
 	font-family: 'Nunito', sans-serif;
 	font-family: 'Nunito Sans', sans-serif;
+	color: #3ac569 !important;
 }
 
-
-
-/*body{
-	background-color: #a3a1a1;
+body{
+	background-color: #dadbdb;
 }
 
-.navbar-default {
-    background-color: #333030;
-    border-color: #1e2022;
-}
-.navbar-default .navbar-nav > li > a {
-    color: white;
-}
-
-.navbar-default .navbar-brand {
-	color: white;
-}
-.navbar-default .navbar-brand:hover {
-	color: #f0f5f9;
-
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    background-color: white;
-    color: red;
-}
-
-.panel-body {
-	background-color: #e3dede;
-}
-.panel-heading {
-	background-color: #e3dede;
-}*/

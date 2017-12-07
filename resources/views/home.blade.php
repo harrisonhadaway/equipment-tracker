@@ -46,7 +46,7 @@
                                 </a>
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">Favorited Equipment shows up here in a list.</h4>
+                                <h4 class="media-heading">Your favorite equipment shows up here in a list.</h4>
                                 Making it easy to access records on the go!
                             </div>
                         </div>

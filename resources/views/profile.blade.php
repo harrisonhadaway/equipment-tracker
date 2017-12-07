@@ -14,22 +14,19 @@
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
         <div class="panel-heading col-sm-12">
-          <div class="row">
-            <div class="col-xs-12 ">
-              <h1>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h1>
-              <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
-            </div>
-          </div>
+          <h6>Last updated {{ $last_update->created_at->diffForHumans() }}</h6>
         </div>
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-6" style="padding: 25px;">
-              <a data-toggle="modal" data-target="#bigpic"><img class="img-responsive center-block" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"></a>
+              <a data-toggle="modal" data-target="#bigpic"><img class="img-responsive center-block" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'" style="max-width: 100%; max-height: 250px; overflow: hidden;"></a>
             </div> 
-            <div class="col-sm-5 col-xs-offset-1" style="padding-top: 25px;">
+            <div class="col-sm-6 col-xs-offset-0" style="padding-top: 0;">
+              <h2>{{ $equipment->year }} {{ $equipment->make }} {{ $equipment->model }}</h2>
               <ul class="list-unstyled">
                 <li><strong>Purchase date:</strong> {{ $equipment->purchase_date }}</li>
                 <li><strong>Purchase from:</strong> {{ $equipment->purchase_from }}</li>
+                <li><strong>Purchase price:</strong> ${{ number_format($equipment->purchase_price) }}</li>
                 <li><strong>{{ $equipment->hours_or_miles }} at purchase:</strong> {{ number_format($equipment->purchase_usage) }}</li>
                 <li><strong>Maintenance Cost:</strong> ${{ number_format($total_cost) }}</li>
                 <li><strong>S/N:</strong> {{ $equipment->serial_number }}</li>
@@ -38,30 +35,26 @@
             </div>
           </div>
           <div class="row">
-            <div class="btn-tool-bar btn-group-justified col-xs-8" role="toolbar" aria-label="...">
+            <div class="btn-tool-bar btn-group-vertical col-xs-12 col-sm-offset-0" role="toolbar" aria-label="...">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#addrecord">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addrecord">
                   <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Service Record</button>
-                <button type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="   #addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
               </div>
               <div class="btn-group" role="group">
-                <button href="#editform" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Info</button>
-                <button href="#editform" type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                <button href="#editform" type="button" class="btn btn-default" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Info</button>
               </div>
               <div class="btn-group" role="group">
-                <button href="#filemodal" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#filemodal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Documentation</button></a>
-                <button href="#filemodal" type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#filemodal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span></button></a>
+                <button href="#filemodal" type="button" class="btn btn-default" data-toggle="modal" data-target="#filemodal"><span class="glyphicon glyphicon-open-file" aria-hidden="true"></span> Documentation</button></a>
               </div>
               <div class="btn-group" role="group">
-                 <button form="star" class="btn btn-default hidden-xs {{ $favorite_class }}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Favorite</button>
-                 <button form="star" class="btn btn-default visible-xs {{ $favorite_class }}">&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                 <button form="star" class="btn btn-default {{ $favorite_class }}"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Favorite</button>
               </div>
             </div>
-            <form id="star" class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
-              {{ csrf_field() }}
-              <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
-            </form>
           </div>
+          <form id="star" class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
+            {{ csrf_field() }}
+            <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
+          </form>
           <div class="table-responsive">
             <table class="table table-hover">
               <thead>
@@ -87,7 +80,7 @@
             </table>
           </div>
           @foreach($maintenance_logs as $maintenance_log)
-            <div class="modal fade" id="{{ $maintenance_log->id}}" tabindex="-1" role="dialog" aria-labelledby="      myModalLabel">
+            <div class="modal fade" id="{{ $maintenance_log->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">

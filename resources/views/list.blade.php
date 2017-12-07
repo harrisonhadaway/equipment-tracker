@@ -28,7 +28,7 @@
                                     <a href="#"><img class="media-object" style="width:60px" src="#" onerror="this.src='../img/placeholder.jpg'" ></a>
                                 </div>
                                 <div class="media-body">
-                                    <h4 class="media-heading">All of your equipment will live here add equipment to get started with Equipment Tracker making your life easier.</h4>
+                                    <h4 class="media-heading">All of your equipment will live here. <br>Start adding equipment to get started with Equipment Tracker.</h4>
                                     Last updated 10 minutes ago.
                                 </div>
                             

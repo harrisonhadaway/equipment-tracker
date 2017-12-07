@@ -14,39 +14,39 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: white;
-                color: black;
-                font-family: sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-                overflow-x: hidden; 
-                overflow-y: auto;
+            background-color: white;
+            color: black;
+            font-family: sans-serif;
+            font-weight: 100;
+            height: 100vh;
+            overflow-x: hidden; 
+            overflow-y: auto;
+            background: url("../img/mechanic.jpg")no-repeat center center fixed;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
             }
 
             h1 {
 
+            font-size: 4rem;
             font-family: 'Nunito Sans', sans-serif;
+            text-shadow: 2px 2px #88dba3;
             }
 
-            ul {
-            margin: auto;
-            }
-
-            .fixleft{
-            position:fixed;
-            bottom:0px;
-            left:50%;
-            }
-
-            .fixright{
-            position:fixed;
-            bottom:0px;
-            /*right:50%;*/
+            .textbox{
+            background-color: rgba(218,219,219,0.6);
+            border-radius: 20px;
+            border: 2px solid #3ac569;
+            padding: 15px; 
+            
             }
 
             .title-height {
-                padding-top: 8%;
+                padding-top: 0%;
             }
 
             .content-height {
@@ -71,9 +71,8 @@
             }
 
             .content {
-                text-align: center;
-                margin-left: 20%;
-                margin-right: 20%;
+                margin-left: 25%;
+                margin-right: 25%;
             }
 
             .title {
@@ -81,7 +80,7 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: #3ac569;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -96,7 +95,6 @@
         </style>
     </head>
     <body>
-
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -108,27 +106,19 @@
                     @endauth
                 </div>
             @endif
-
-            <div class="">
+            <div>
                 <div class="flex-center title-height">
                     <h1>Equipment Tracker</h1>
                 </div>
-                <div class="position-ref content">
-                    Create each piece of equipment a 'profile page'. <br><br>Add records and all other equipment documentation to one central location. <br><br> Utilizing Equipment Tracker your records will be accessible from anywhere in world.
+                <div class="textbox content">
+                    <div class="position-ref">
+                        <p><strong>Track your equipment's information, documentation and maintenance records all in one location.</strong></p>
+                    </div>
+                    <div class="position-ref" style="padding-top: 5%;">
+                        <H2>Sign up today!</H2>
+                    </div>
                 </div>
-                <div class="position-ref content" style="padding-top: 5%;">
-                    <H2>Go ahead register and give us a try!</H2>
-                </div>
-                
             </div>
         </div>
-        <div class="position-ref">
-                    <marquee behavior="scroll" direction="right" scrollamount="10">
-                        <img src="../img/tractor.png" style="height: auto; width: 30%;">
-                    </marquee>
-                    
-        </div>
-        
     </body>
-
 </html>
