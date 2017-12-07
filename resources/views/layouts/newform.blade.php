@@ -7,7 +7,7 @@
         <h4 class="modal-title" id="myModalLabel">New Equipment</h4>
       </div>
       <div class="modal-body">
-        <form data-toggle="validator" id="newform1" method="POST" action="/equipment" enctype="multipart/form-data">         
+        <form data-toggle="validator" id="newform1" method="POST" action="/equipment" enctype="multipart/form-data">                   
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
           <div class="form-group row">
             <div class="col-xs-4">
@@ -69,5 +69,6 @@
     </div>
   </div>
 </div>
+
 
 

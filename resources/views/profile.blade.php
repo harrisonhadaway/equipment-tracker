@@ -27,9 +27,6 @@
             <div class="col-sm-6" style="padding: 25px;">
               <a data-toggle="modal" data-target="#bigpic"><img class="img-responsive center-block" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"></a>
             </div> 
-          
-          
-            
             <div class="col-sm-5 col-xs-offset-1" style="padding-top: 25px;">
               <ul class="list-unstyled">
                 <li><strong>Purchase date:</strong> {{ $equipment->purchase_date }}</li>
@@ -41,12 +38,12 @@
               </ul>
             </div>
           </div>
-    
           <div class="row">
             <div class="btn-tool-bar btn-group-justified col-xs-8" role="toolbar" aria-label="...">
               <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Service Record</button>
-                <button type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="#addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#addrecord">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Service Record</button>
+                <button type="button" class="btn btn-default btn-lg visible-xs" data-toggle="modal" data-target="   #addrecord"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
               </div>
               <div class="btn-group" role="group">
                 <button href="#editform" type="button" class="btn btn-default hidden-xs" data-toggle="modal" data-target="#editform"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Info</button>
@@ -62,12 +59,11 @@
               </div>
             </div>
             <form id="star" class="button-form" method="post" action="/profile/{{ $equipment->id }}/favorite">
-                    {{ csrf_field() }}
-                  <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
+              {{ csrf_field() }}
+              <input type="hidden" name="highlighted" id="highlighted" value="{{ $equipment->highlighted }}">
             </form>
           </div>
-     
-            <div class="table-responsive">
+          <div class="table-responsive">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -91,8 +87,8 @@
               </tbody>
             </table>
           </div>
-            @foreach($maintenance_logs as $maintenance_log)
-            <div class="modal fade" id="{{ $maintenance_log->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          @foreach($maintenance_logs as $maintenance_log)
+            <div class="modal fade" id="{{ $maintenance_log->id}}" tabindex="-1" role="dialog" aria-labelledby="      myModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -111,7 +107,7 @@
                         <div class="col-xs-3">{{ $equipment->hours_or_miles }}
                           <input id="usage_at_service" name="usage_at_service" type="number" step="0.01" min="0" class="form-control" value="{{ $maintenance_log->usage_at_service }}">
                         </div>
-                        </div>
+                      </div>
                       <div class="row">
                         <div class="col-xs-5">Serviced by
                           <input id="serviced_by" name="serviced_by" type="text" class="form-control" value="{{ $maintenance_log->serviced_by }}">
@@ -122,8 +118,8 @@
                       </div>
                               Notes
                       <textarea id="service_notes" name="service_notes" class="form-control" rows="2">{{ $maintenance_log->service_notes }}</textarea>
-                  </div>
                     </form>
+                  </div>
                   <div class="modal-footer">
                     <form id="deleteRecord{{$maintenance_log->id}}" class="button-form" method="delete" action="/deleteRecord/{{ $maintenance_log->id }}">
                     </form>
@@ -139,4 +135,5 @@
         </div>
       </div>
     </div>
+  </div>
 @endsection

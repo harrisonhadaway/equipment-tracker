@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Lora:700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300|Nunito:300" rel="stylesheet">
         <!-- Styles -->
         <style>
             html, body {
@@ -24,10 +24,14 @@
                 overflow-y: auto;
             }
 
+            h1 {
+
+            font-family: 'Nunito Sans', sans-serif;
+            }
+
             ul {
-    width: 70%;
-    margin: auto;
-}
+            margin: auto;
+            }
 
             .fixleft{
             position:fixed;
@@ -38,7 +42,7 @@
             .fixright{
             position:fixed;
             bottom:0px;
-            right:50%;
+            /*right:50%;*/
             }
 
             .title-height {
@@ -115,12 +119,16 @@
                 <div class="position-ref content" style="padding-top: 5%;">
                     <H2>Go ahead register and give us a try!</H2>
                 </div>
-                <div class="position-ref content">
-                    <img src="../img/tractor.png" class="fixright" style="height: auto; width: 30%;">
-                    <img src="../img/truck.png" class="fixleft" style="height: auto; width: 35%;">
-                </div>
+                
             </div>
         </div>
+        <div class="position-ref">
+                    <marquee behavior="scroll" direction="right" scrollamount="10">
+                        <img src="../img/tractor.png" style="height: auto; width: 30%;">
+                    </marquee>
+                    
+        </div>
+        
     </body>
-    <script src="{{ asset('js/app.js') }}"></script>
+
 </html>
