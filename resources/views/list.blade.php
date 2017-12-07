@@ -1,7 +1,6 @@
 @extends('layouts.app')
-@extends('layouts.newform')
 @section('content')
-
+@include('layouts.newform')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

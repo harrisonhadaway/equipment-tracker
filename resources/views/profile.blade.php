@@ -1,10 +1,9 @@
 @extends('layouts.app')
-@extends('layouts.newform')
-@extends('layouts.newrecord')
-@extends('layouts.editform')
-@extends('layouts.files')
-
 @section('content')
+@include('layouts.newform')
+@include('layouts.newrecord')
+@include('layouts.editform')
+@include('layouts.files')
 <div class="modal" id="bigpic" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="image">
     <img id="myImg" src="{{ $equipment->imageurl }}" onerror="this.src='../img/placeholder.jpg'"  style="border: solid; width:100%; height:auto;"> 
