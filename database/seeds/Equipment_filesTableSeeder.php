@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use Carbon\Carbon;
+
 class Equipment_filesTableSeeder extends Seeder
 {
     /**
@@ -11,7 +13,7 @@ class Equipment_filesTableSeeder extends Seeder
      */
     public function run()
     {
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '1',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -19,7 +21,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '2',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -27,7 +29,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '3',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -35,7 +37,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '4',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -43,7 +45,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '5',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -51,7 +53,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '6',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -59,7 +61,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '7',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -67,7 +69,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '8',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -75,7 +77,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '9',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
@@ -83,7 +85,7 @@ class Equipment_filesTableSeeder extends Seeder
         	'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         	'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         	]);
-         DB::table('equipmentfiles')->insert([
+         DB::table('equipment_files')->insert([
         	'equipment_id' => '10',
         	'user_id' => '1',
         	'filename' => "Owner's Manual",
