@@ -20,7 +20,7 @@
             </div>
             <div class="col-xs-4">
               <label for="year">Year</label>
-              <input class="form-control" id="year" name="year" type="text" required>
+              <input class="form-control" id="year" name="year" type="text" maxlength="4" required>
             </div>
           </div>
           <div class="form-group row">
@@ -34,7 +34,8 @@
             </div>
             <div class="col-xs-4">
               <label for="purchase_price">Purchase Price:</label>
-              <input class="form-control" id="purchase_price" name="purchase_price" type="number" step="0.01" min="0" >
+              <input class="form-control" id="purchase_price" name="purchase_price" type="number" step="0.01" min="0" 
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57" title="Numbers only">
             </div>
           </div>
           <div class="form-group row">
@@ -57,7 +58,7 @@
           </div>  
           <div class="form-group row">
             <div class="col-xs-6">
-              <strong>Equipment Photo Upload:</strong><input type="file" name="file" id="file">
+              <strong>Equipment Photo Upload:</strong><input type="file" name="file" id="file" accept="image/*">
             </div>
           </div>             
         </form>

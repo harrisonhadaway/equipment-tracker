@@ -36,7 +36,7 @@
               <input type="text" class="form-control-text" name="filename" id="filename" placeholder="Owner's Manual" required><br>
             </div>
             <div class="col-sm-5 form-group">
-              <input type="file" class="form-control-file" name="file" id="file" required>
+              <input type="file" class="form-control-file" name="file" id="file" accept=".pdf" required>
             </div>
             <div class="col-sm-3">
               <button data-disable form="newfile" type="submit" value="save" class="btn btn-sm btn-primary">Save File</button>
